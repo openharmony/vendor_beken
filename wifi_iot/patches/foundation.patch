@@ -1,0 +1,1844 @@
+diff --git a/code-1.1.0-git/foundation/communication/bluetooth/interfaces/innerkits/native_c/include/ohos_bt_def.h b/foundation/communication/bluetooth/interfaces/innerkits/native_c/include/ohos_bt_def.h
+new file mode 100755
+index 0000000..8bd4b46
+--- /dev/null
++++ b/foundation/communication/bluetooth/interfaces/innerkits/native_c/include/ohos_bt_def.h
+@@ -0,0 +1,323 @@
++/*
++ * Copyright (c) 2021 Huawei Device Co., Ltd.
++ * Licensed under the Apache License, Version 2.0 (the "License");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *    http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an "AS IS" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ */
++
++/**
++ * @addtogroup Bluetooth
++ * @{
++ *
++ * @brief Provides basic Bluetooth capabilities.
++ *
++ * This module allows you to enable and disable Bluetooth, and access basic Bluetooth capabilities.\n
++ * Bluetooth uses profiles such as BT-GAP, BLE, BLE-GATT, BT-data transmission, HFP, A2DP, AVRCP, MAP, and PBAP.
++ *
++ * @since 6
++ */
++
++/**
++ * @file ohos_bt_def.h
++ *
++ * @brief Declares basic data structures, macros, enumerations, and structures for Bluetooth services.
++ *
++ * @since 6
++ */
++
++#ifndef OHOS_BT_DEF_H
++#define OHOS_BT_DEF_H
++
++/**
++ * @brief Defines the address length of a Bluetooth device.
++ *
++ */
++#define OHOS_BD_ADDR_LEN 6
++
++/**
++ * @brief Defines the maximum length of a Bluetooth UUID, in bytes.
++ *
++ */
++#define OHOS_BLE_UUID_MAX_LEN 16
++
++/**
++ * @brief Enumerates characteristic properties.
++ *
++ * Characteristic properties determine how characteristic values are used and\n
++ * how characteristic descriptors are accessed. If there are multiple properties,\n
++ * their values can be connected using the logical operator OR.\n
++ * For example, <b>0x01 | 0x02</b> indicates that the characteristic value can be broadcast and read.
++ *
++ * @since 6
++ */
++typedef enum {
++    /** The characteristic value can be broadcast. */
++    OHOS_GATT_CHARACTER_PROPERTY_BIT_BROADCAST = 0x01,
++    /** The characteristic value can be read. */
++    OHOS_GATT_CHARACTER_PROPERTY_BIT_READ = 0x02,
++    /** The characteristic value can be written, and no response needs to be sent to the client. */
++    OHOS_GATT_CHARACTER_PROPERTY_BIT_WRITE_NO_RSP = 0x04,
++    /** The characteristic value can be written, and a response needs to be sent to the client. */
++    OHOS_GATT_CHARACTER_PROPERTY_BIT_WRITE = 0x08,
++    /**
++     * The characteristic value can be sent to the client through a notification, and the client does not need to
++     * reply with a confirmation message.
++     */
++    OHOS_GATT_CHARACTER_PROPERTY_BIT_NOTIFY = 0x10,
++    /**
++     * The characteristic value can be sent to the client through an indication, and the client does not need to
++     * reply with a confirmation message.
++     */
++    OHOS_GATT_CHARACTER_PROPERTY_BIT_INDICATE = 0x20,
++    /** The characteristic value can be written with a signature. */
++    OHOS_GATT_CHARACTER_PROPERTY_BIT_SIGNED_WRITE = 0x40,
++    /** The characteristic has extended properties. */
++    OHOS_GATT_CHARACTER_PROPERTY_BIT_EXTENDED_PROPERTY = 0x80
++} GattCharacteristicProperty;
++
++/**
++ * @brief Enumerates permissions for an attribute.
++ *
++ * If there are multiple permissions, their values can be connected using the logical operator OR.\n
++ * For example, <b>0x01 | 0x02</b> indicates the reading and encrypted reading permissions.
++ *
++ * @since 6
++ */
++typedef enum {
++    /** Reading */
++    OHOS_GATT_PERMISSION_READ = 0x01,
++    /** Encrypted reading */
++    OHOS_GATT_PERMISSION_READ_ENCRYPTED = 0x02,
++    /** Encrypted reading with man-in-the-middle (MITM) protection */
++    OHOS_GATT_PERMISSION_READ_ENCRYPTED_MITM = 0x04,
++    /** Writing */
++    OHOS_GATT_PERMISSION_WRITE = 0x10,
++    /** Encrypted writing */
++    OHOS_GATT_PERMISSION_WRITE_ENCRYPTED = 0x20,
++    /** Encrypted writing with MITM protection */
++    OHOS_GATT_PERMISSION_WRITE_ENCRYPTED_MITM = 0x40,
++    /** Signed writing */
++    OHOS_GATT_PERMISSION_WRITE_SIGNED = 0x80,
++    /** Signed writing with MITM protection */
++    OHOS_GATT_PERMISSION_WRITE_SIGNED_MITM = 0x100
++} GattAttributePermission;
++
++/**
++ * @brief Enumerates transport IDs.
++ *
++ * @since 6
++ */
++typedef enum {
++    /** Invalid transport ID */
++    OHOS_BT_TRANSPORT_INVALID = 0x00,
++    /** BR/EDR */
++    OHOS_BT_TRANSPORT_BR_EDR = 0x01,
++    /** LE */
++    OHOS_BT_TRANSPORT_LE = 0x02
++} BtTransportId;
++
++/**
++ * @brief Enumerates Bluetooth statuses.
++ *
++ * @since 6
++ */
++typedef enum {
++    /** Success */
++    OHOS_BT_STATUS_SUCCESS = 0x00,
++    /** Failure */
++    OHOS_BT_STATUS_FAIL,
++    /** Bluetooth not ready */
++    OHOS_BT_STATUS_NOT_READY,
++    /** Insufficient memory */
++    OHOS_BT_STATUS_NOMEM,
++    /** System busy */
++    OHOS_BT_STATUS_BUSY,
++    /** Operation completed */
++    OHOS_BT_STATUS_DONE,
++    /** Bluetooth not supported by the current version or device */
++    OHOS_BT_STATUS_UNSUPPORTED,
++    /** Invalid parameters */
++    OHOS_BT_STATUS_PARM_INVALID,
++    /** Request unhandled */
++    OHOS_BT_STATUS_UNHANDLED,
++    /** Authentication failure */
++    OHOS_BT_STATUS_AUTH_FAILURE,
++    /** Remote device shut down */
++    OHOS_BT_STATUS_RMT_DEV_DOWN,
++    /** Authentication rejected */
++    OHOS_BT_STATUS_AUTH_REJECTED
++} BtStatus;
++
++/**
++ * @brief Enumerates result codes for GATT attribute operations.
++ *
++ * The error codes are based on Bluetooth Core Specification Version 5.2 | Vol 3, Part F, Table 3.4.
++ *
++ * @since 6
++ */
++typedef enum {
++    /** Success */
++    OHOS_GATT_SUCCESS = 0x00,
++    /** Invalid attribute handle */
++    OHOS_GATT_INVALID_HANDLE = 0x01,
++    /** Attribute unreadable */
++    OHOS_GATT_READ_NOT_PERMITTED = 0x02,
++    /** Attribute unwritable */
++    OHOS_GATT_WRITE_NOT_PERMITTED = 0x03,
++    /** Invalid attribute PDU */
++    OHOS_GATT_INVALID_PDU = 0x04,
++    /** Authentication required for reading or writing the attribute */
++    OHOS_GATT_INSUFFICIENT_AUTHENTICATION = 0x05,
++    /** Request not supported */
++    OHOS_GATT_REQUEST_NOT_SUPPORTED = 0x06,
++    /** Invalid offset */
++    OHOS_GATT_INVALID_OFFSET = 0x07,
++    /** Authorization required for reading or writing the attribute */
++    OHOS_GATT_INSUFFICIENT_AUTHORIZATION = 0x08,
++    /** The queue is full of prepare writes. */
++    OHOS_GATT_PREPARE_QUEUE_FULL = 0x09,
++    /** Attribute not found in the specified attribute handle */
++    OHOS_GATT_ATTRIBUTE_NOT_FOUND = 0x0A,
++    /** The attribute is not a long attribute and cannot use the <b>ATT_READ_BLOB_REQ</b> PDU. */
++    OHOS_GATT_ATTRIBUTE_NOT_LONG = 0x0B,
++    /** Insufficient size for the encryption key */
++    OHOS_GATT_INSUFFICIENT_ENCRYPTION_KEY_SIZE = 0x0C,
++    /** Invalid attribute value length */
++    OHOS_GATT_INVALID_ATTRIBUTE_VALUE_LENGTH = 0x0D,
++    /** Unlikely error */
++    OHOS_GATT_UNLIKELY_ERROR = 0x0E,
++    /** Encryption required for reading or writing the attribute */
++    OHOS_GATT_INSUFFICIENT_ENCRYPTION = 0x0F,
++    /** Unsupported grouping attribute */
++    OHOS_GATT_UNSUPPORTED_GROUP_TYPE = 0x10,
++    /** Insufficient resources */
++    OHOS_GATT_INSUFFICIENT_RESOURCES = 0x11,
++    /** The server needs to request the client to rediscover the database. */
++    OHOS_GATT_DATABASE_OUT_OF_SYNC = 0x12,
++    /** Attribute value not allowed */
++    OHOS_GATT_VALUE_NOT_ALLOWED = 0x13,
++} GattStatus;
++
++/**
++ * @brief Enumerates attribute types.
++ *
++ * @since 6
++ */
++typedef enum {
++    /** Service */
++    OHOS_BLE_ATTRIB_TYPE_SERVICE = 0x00,
++    /** Characteristic */
++    OHOS_BLE_ATTRIB_TYPE_CHAR,
++    /** Characteristic value */
++    OHOS_BLE_ATTRIB_TYPE_CHAR_VALUE,
++    /** Client characteristic configuration */
++    OHOS_BLE_ATTRIB_TYPE_CHAR_CLIENT_CONFIG,
++    /** Characteristic user description */
++    OHOS_BLE_ATTRIB_TYPE_CHAR_USER_DESCR,
++} BleAttribType;
++
++/**
++ * @brief Enumerates UUID types.
++ *
++ * @since 6
++ */
++typedef enum {
++    /** Invalid UUID */
++    OHOS_UUID_TYPE_NULL = 0x00,
++    /** 16-bit UUID */
++    OHOS_UUID_TYPE_16_BIT,
++    /** 32-bit UUID */
++    OHOS_UUID_TYPE_32_BIT,
++    /** 128-bit UUID */
++    OHOS_UUID_TYPE_128_BIT,
++} UuidType;
++
++/**
++ * @brief Enumerates types of characteristic and descriptor write operations performed by the GATT client.
++ *
++ * @since 6
++ */
++typedef enum {
++    /** Write operation without requiring a response from the server */
++    OHOS_GATT_WRITE_NO_RSP = 0x01,
++    /** Write operation requiring a response from the server */
++    OHOS_GATT_WRITE_DEFAULT = 0x02,
++    /** Prepare write requiring a response from the server */
++    OHOS_GATT_WRITE_PREPARE = 0x03,
++    /** Write operation with an authentication signature */
++    OHOS_GATT_WRITE_SIGNED = 0x04
++} BtGattWriteType;
++
++/**
++ * @brief Enumerates profile connection statuses.
++ *
++ * @since 6
++ */
++typedef enum {
++    /** Connecting */
++    OHOS_PROFILE_STATE_CONNECTING = 0x01,
++    /** Connected */
++    OHOS_PROFILE_STATE_CONNECTED = 0x02,
++    /** Disconnecting */
++    OHOS_PROFILE_STATE_DISCONNECTING = 0x03,
++    /** Disconnected */
++    OHOS_PROFILE_STATE_DISCONNECTED = 0x04
++} BtProfileConnectState;
++
++/**
++ * @brief Enumerates connection strategies.
++ *
++ * @since 6
++ */
++typedef enum {
++    /** Unknown strategy */
++    OHOS_CONNECTION_UNKNOWN = 0x00,
++    /** Allowing connections */
++    OHOS_CONNECTION_ALLOWED,
++    /** Forbidding connections */
++    OHOS_CONNECTION_FORBIDDEN
++} BtConnectStrategyType;
++
++/**
++ * @brief Enumerates A2DP playing states of the device.
++ *
++ * @since 6
++ */
++typedef enum {
++    /** Not playing */
++    OHOS_A2DP_NOT_PLAYING = 0x00,
++    /** Playing */
++    OHOS_A2DP_IS_PLAYING
++} BtA2dpPlayingState;
++
++/**
++ * @brief Defines the Bluetooth address of the device.
++ *
++ * @since 6
++ */
++typedef struct {
++    /** Bluetooth address */
++    unsigned char addr[OHOS_BD_ADDR_LEN];
++} BdAddr;
++
++/**
++ * @brief Defines the UUID.
++ *
++ * @since 6
++ */
++typedef struct {
++    /** UUID length */
++    unsigned char uuidLen;
++    /** UUID field */
++    char *uuid;
++} BtUuid;
++#endif
++/** @} */
+diff --git a/code-1.1.0-git/foundation/communication/bluetooth/interfaces/innerkits/native_c/include/ohos_bt_gatt.h b/foundation/communication/bluetooth/interfaces/innerkits/native_c/include/ohos_bt_gatt.h
+new file mode 100755
+index 0000000..d8f143a
+--- /dev/null
++++ b/foundation/communication/bluetooth/interfaces/innerkits/native_c/include/ohos_bt_gatt.h
+@@ -0,0 +1,645 @@
++/*
++ * Copyright (c) 2021 Huawei Device Co., Ltd.
++ * Licensed under the Apache License, Version 2.0 (the "License");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *    http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an "AS IS" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ */
++
++/**
++ * @addtogroup Bluetooth
++ * @{
++ *
++ * @brief Provides basic Bluetooth capabilities.
++ *
++ * This module allows you to enable and disable Bluetooth, and access basic Bluetooth capabilities.\n
++ * Bluetooth uses profiles such as BT-GAP, BLE, BLE-GATT, BT-data transmission, HFP, A2DP, AVRCP, MAP, and PBAP.
++ *
++ * @since 6
++ */
++
++/**
++ * @file ohos_bt_gatt.h
++ *
++ * @brief Declares basic GATT data structures and functions, such as advertising and scan functions.
++ *
++ * @since 6
++ */
++
++
++#ifndef OHOS_BT_GATT_H
++#define OHOS_BT_GATT_H
++
++#include "ohos_bt_def.h"
++#include "stdbool.h"
++/**
++ * @brief Enumerates advertising filtering parameters.
++ *
++ * The parameters specify whether the advertiser uses a whitelist to filter scan or connection requests from scanners.
++ *
++ * @since 6
++ */
++typedef enum {
++    /** Processing scan and connection requests from all devices */
++    OHOS_BLE_ADV_FILTER_ALLOW_SCAN_ANY_CON_ANY = 0x00,
++    /** Processing connection requests from all devices and only the scan requests from devices in the whitelist */
++    OHOS_BLE_ADV_FILTER_ALLOW_SCAN_WLST_CON_ANY = 0x01,
++    /** Processing scan requests from all devices and only the connection requests from devices in the whitelist */
++    OHOS_BLE_ADV_FILTER_ALLOW_SCAN_ANY_CON_WLST = 0x02,
++    /** Processing only the scan and connection requests from devices in the whitelist */
++    OHOS_BLE_ADV_FILTER_ALLOW_SCAN_WLST_CON_WLST = 0x03,
++} BleAdvFilter;
++
++/**
++ * @brief Enumerates advertisement types.
++ *
++ * @since 6
++ */
++typedef enum {
++    /** Connectable and scannable undirected advertisement (default) */
++    OHOS_BLE_ADV_IND = 0x00,
++    /** Connectable directed advertisement with a high duty ratio */
++    OHOS_BLE_ADV_DIRECT_IND_HIGH = 0x01,
++    /** Scannable undirected advertisement */
++    OHOS_BLE_ADV_SCAN_IND = 0x02,
++    /** Unconnectable undirected advertisement */
++    OHOS_BLE_ADV_NONCONN_IND = 0x03,
++    /** Connectable directed advertisement with a low duty ratio */
++    OHOS_BLE_ADV_DIRECT_IND_LOW  = 0x04,
++} BleAdvType;
++
++/**
++ * @brief Enumerates I/O capability modes.
++ *
++ * @since 6
++ */
++typedef enum {
++    /** <b>DisplayOnly</b>: display capability only */
++    OHOS_BLE_IO_CAP_OUT = 0x00,
++    /** <b>DisplayYesNo</b>: YES/NO input and display capabilities */
++    OHOS_BLE_IO_CAP_IO,
++    /**
++     * <b>KeyboardOnly</b>: Input of a number from 0 to 9, the confirmation key, and YES/NO,
++     * with no display capability
++     */
++    OHOS_BLE_IO_CAP_IN,
++    /** <b>NoInputNoOutput</b>: no I/O capability */
++    OHOS_BLE_IO_CAP_NONE,
++    /**
++     * <b>KeyboardDisplay</b>: Input of a number from 0 to 9, the confirmation key, and YES/NO,
++     * with the display capability
++     */
++    OHOS_BLE_IO_CAP_KBDISP
++} BleIoCapMode;
++
++/**
++ * @brief Enumerates authentication modes for secure connection requests.
++ *
++ * @since 6
++ */
++typedef enum {
++    /** No bonding */
++    OHOS_BLE_AUTH_NO_BOND = 0x00,
++    /** Bonding */
++    OHOS_BLE_AUTH_BOND,
++    /** MITM only */
++    OHOS_BLE_AUTH_REQ_MITM,
++    /** Secure connection only */
++    OHOS_BLE_AUTH_REQ_SC_ONLY,
++    /** Secure connection and bonding */
++    OHOS_BLE_AUTH_REQ_SC_BOND,
++    /** Secure connection and MITM */
++    OHOS_BLE_AUTH_REQ_SC_MITM,
++    /** Secure connection, MITM, and bonding */
++    OHOS_BLE_AUTH_REQ_SC_MITM_BOND
++} BleAuthReqMode;
++
++/**
++ * @brief Enumerates BLE scan types.
++ *
++ * @since 6
++ */
++typedef enum {
++    /** A passive scan with no scan request */
++    OHOS_BLE_SCAN_TYPE_PASSIVE = 0x00,
++    /** An active scan that may contain a scan request */
++    OHOS_BLE_SCAN_TYPE_ACTIVE,
++} BleScanType;
++
++/**
++ * @brief Enumerates policies for filtering advertisements in a BLE scan.
++ *
++ * @since 6
++ */
++typedef enum {
++    /**
++     * Accepting all advertisements except the directed advertisements
++     * that are not sent to the current device (default)
++     */
++    OHOS_BLE_SCAN_FILTER_POLICY_ACCEPT_ALL = 0x00,
++    /**
++     * Accepting advertisements from devices in the whitelist and ignoring the directed advertisements
++     * that are not sent to the current device */
++    OHOS_BLE_SCAN_FILTER_POLICY_ONLY_WHITE_LIST,
++    /**
++     * Accepting all undirected advertisements, directed advertisements sent by advertisers with
++     * resolvable private addresses, and all the directed advertisements sent to the current device
++     */
++    OHOS_BLE_SCAN_FILTER_POLICY_ACCEPT_ALL_AND_RPA,
++    /**
++     * Accepting all undirected advertisements from the devices in the whitelist,
++     * directed advertisements sent by advertisers with resolvable private addresses,
++     * and all the directed advertisements sent to the current device
++     */
++    OHOS_BLE_SCAN_FILTER_POLICY_ONLY_WHITE_LIST_AND_RPA
++} BleScanFilterPolicy;
++
++/**
++ * @brief Enumerates advertisement types in the BLE scan result.
++ *
++ * @since 6
++ */
++typedef enum {
++    /** Extended, unconnectable, unscannable, and undirected advertisement */
++    OHOS_BLE_EVT_NON_CONNECTABLE_NON_SCANNABLE = 0x00,
++    /** Extended, unconnectable, unscannable, and directed advertisement */
++    OHOS_BLE_EVT_NON_CONNECTABLE_NON_SCANNABLE_DIRECTED = 0x04,
++    /** Extended, connectable, and undirected advertisement */
++    OHOS_BLE_EVT_CONNECTABLE = 0x01,
++    /** Extended, connectable, and directed advertisement */
++    OHOS_BLE_EVT_CONNECTABLE_DIRECTED = 0x05,
++    /** Extended, scannable, and undirected advertisement */
++    OHOS_BLE_EVT_SCANNABLE = 0x02,
++    /** Extended, scannable, and directed advertisement */
++    OHOS_BLE_EVT_SCANNABLE_DIRECTED = 0x06,
++
++    /** Legacy, unconnectable, and undirected advertisement */
++    OHOS_BLE_EVT_LEGACY_NON_CONNECTABLE = 0x10,
++    /** Legacy, scannable, and undirected advertisement */
++    OHOS_BLE_EVT_LEGACY_SCANNABLE = 0x12,
++    /** Legacy, connectable, scannable, and undirected advertisement */
++    OHOS_BLE_EVT_LEGACY_CONNECTABLE = 0x13,
++    /** Legacy, connectable, and directed advertisement */
++    OHOS_BLE_EVT_LEGACY_CONNECTABLE_DIRECTED = 0x15,
++    /** Legacy scan response corresponding to <b>ADV_SCAN_IND</b> */
++    OHOS_BLE_EVT_LEGACY_SCAN_RSP_TO_ADV_SCAN = 0x1A,
++    /** Legacy scan response corresponding to <b>ADV_IND</b> */
++    OHOS_BLE_EVT_LEGACY_SCAN_RSP_TO_ADV = 0x1B
++} BleScanResultEvtType;
++
++/**
++ * @brief Enumerates data integrity types for a BLE scan result.
++ *
++ * @since 6
++ */
++typedef enum {
++    /** Complete data or the last segment */
++    OHOS_BLE_DATA_COMPLETE = 0x00,
++    /** Incomplete data, with more data to come */
++    OHOS_BLE_DATA_INCOMPLETE_MORE_TO_COME = 0x01,
++    /** Incomplete truncated data, with no more data to come */
++    OHOS_BLE_DATA_INCOMPLETE_TRUNCATED = 0x02,
++} BleScanResultDataStatus;
++
++/**
++ * @brief Enumerates address types for a BLE scan result.
++ *
++ * @since 6
++ */
++typedef enum {
++    /** Public device address */
++    OHOS_BLE_PUBLIC_DEVICE_ADDRESS = 0x00,
++    /** Random device address */
++    OHOS_BLE_RANDOM_DEVICE_ADDRESS = 0x01,
++    /** Public identity address */
++    OHOS_BLE_PUBLIC_IDENTITY_ADDRESS = 0x02,
++    /** Random (static) identity address */
++    OHOS_BLE_RANDOM_STATIC_IDENTITY_ADDRESS = 0x03,
++    /** Unresolvable random device address */
++    OHOS_BLE_UNRESOLVABLE_RANDOM_DEVICE_ADDRESS = 0xFE,
++    /** No address (anonymous advertisement) */
++    OHOS_BLE_NO_ADDRESS = 0xFF,
++} BleScanResultAddrType;
++
++/**
++ * @brief Enumerates PHY types for a BLE scan result.
++ *
++ * @since 6
++ */
++typedef enum {
++    /** No advertisement packet */
++    OHOS_BLE_SCAN_PHY_NO_PACKET = 0x00,
++    /** 1M PHY */
++    OHOS_BLE_SCAN_PHY_1M = 0x01,
++    /** 2M PHY */
++    OHOS_BLE_SCAN_PHY_2M = 0x02,
++    /** Coded PHY */
++    OHOS_BLE_SCAN_PHY_CODED = 0x03
++} BleScanResultPhyType;
++
++/**
++ * @brief Defines BLE advertising/scan response data.
++ *
++ * @since 6
++ */
++typedef struct {
++    /** Advertising data length */
++    unsigned short advLength;
++    /** Advertising data */
++    char *advData;
++    /** Scan response data length */
++    unsigned short scanRspLength;
++    /** Scan response data */
++    char *scanRspData;
++} BleConfigAdvData;
++
++/**
++ * @brief Defines BLE advertising parameters.
++ *
++ * @since 6
++ */
++typedef struct {
++    /**
++     * Minimum advertising interval.
++     * It is calculated as follows: [N * 0.625 ms], where N indicates the value of this field.
++     */
++    int minInterval;
++    /**
++     * Maximum advertising interval.
++     * It is calculated as follows: [N * 0.625 ms], where N indicates the value of this field.
++     */
++    int maxInterval;
++    /** Advertising type */
++    BleAdvType advType;
++    /** Local address type */
++    unsigned char ownAddrType;
++    /** Peer address type */
++    unsigned char peerAddrType;
++    /** Peer address */
++    BdAddr peerAddr;
++    /**
++     * Advertising channel to be used. For example, <b>0x01</b> indicates that channel 37 is to be used,
++     * and <b>0x07</b> indicates that channels 37, 38, and 39 are used.
++     */
++    int channelMap;
++    /** Advertisement filtering policy based on a whitelist */
++    BleAdvFilter advFilterPolicy;
++    /** Transmit power (dBm) */
++    int txPower;
++    /** Advertising duration. It is calculated as follows: [N * 10 ms], where N indicates the value of this field. */
++    int duration;
++} BleAdvParams;
++
++/**
++ * @brief Defines BLE scan parameters.
++ *
++ * @since 6
++ */
++typedef struct {
++    /** Scan interval. It is calculated as follows: [N * 0.625 ms], where N indicates the value of this field. */
++    unsigned short scanInterval;
++    /** Scan window. It is calculated as follows: [N * 0.625 ms], where N indicates the value of this field. */
++    unsigned short scanWindow;
++    /** Scan type, as enumerated in {@link BleScanType} */
++    unsigned char scanType;
++    /**
++     * PHY on which the advertising packets are received.
++     * <b>bit0</b> indicates 1M PHY and <b>bit2</b> indicates LE Coded PHY.
++     * <b>bit0</b> and <b>bit2</b> can both be set to <b>1</b>. All other bits are reserved for future use.
++     */
++    unsigned char scanPhy;
++    /** Policy for filtering the scan result, as enumerated in {@link BleScanFilterPolicy} */
++    unsigned char scanFilterPolicy;
++} BleScanParams;
++
++/**
++ * @brief Defines raw data for the BLE advertising and scan response.
++ *
++ * This structure is available for system applications only.
++ *
++ * @since 6
++ */
++typedef struct {
++    /** Advertising data */
++    unsigned char *advData;
++    /** Advertising data length */
++    unsigned int advDataLen;
++    /** Scan response data */
++    unsigned char *rspData;
++    /** Scan response data length */
++    unsigned int rspDataLen;
++} StartAdvRawData;
++
++/**
++ * @brief Defines the BLE scan result data.
++ *
++ * @since 6
++ */
++typedef struct {
++    /** Advertisement type, as enumerated in {@link BleScanResultEvtType} */
++    unsigned char eventType;
++    /** Data status, as enumerated in {@link BleScanResultDataStatus} */
++    unsigned char dataStatus;
++    /** Address type, as enumerated in {@link BleScanResultAddrType}. Value <b>0xFE</b> is unavailable. */
++    unsigned char addrType;
++    /** Address */
++    BdAddr addr;
++    /**
++     * PHY type of a primary advertisement, as enumerated in {@link BleScanResultPhyType}.
++     * The value can only be <b>0x01</b> or <b>0x03</b>.
++     */
++    unsigned char primaryPhy;
++    /**
++     * PHY type of a secondary advertisement.
++     * The value can be any of the enumerations of {@link BleScanResultPhyType}.
++     */
++    unsigned char secondaryPhy;
++    /**
++     * Advertising SID in the ADI field of the PDU or of the original scannable advertisement (for scan responses).
++     * Value <b>0xFF</b> indicates that no ADI field is available.
++     */
++    unsigned char advSid;
++    /**
++     * Transmit power. The value ranges from -127 to +20 dBm.
++     * Value <b>0x7F</b> indicates that this field is invalid.
++     */
++    char txPower;
++    /** RSSI. The value ranges from -127 to +20 dBm. Value <b>0x7F</b> indicates that this field is invalid. */
++    char rssi;
++    /**
++     * Periodic advertising interval.
++     * It is calculated as follows: [N * 1.25 ms], where N indicates the value of this field.
++     * Value <b>0x00</b> indicates that this field is invalid.
++     */
++    unsigned short periodicAdvInterval;
++    /**
++     * Address type for directed advertising, as enumerated in {@link BleScanResultAddrType}.
++     * Value <b>0xFF</b> is unavailable.
++     */
++    unsigned char directAddrType;
++    /** Address for directed advertising */
++    BdAddr directAddr;
++    /** Advertising data length */
++    unsigned char advLen;
++    /** Advertising data */
++    unsigned char *advData;
++} BtScanResultData;
++
++/**
++ * @brief Called when advertising is enabled. For details, see {@link BleStartAdv}.
++ *
++ * @since 6
++ */
++typedef void (*AdvEnableCallback)(int advId, int status);
++
++/**
++ * @brief Called when advertising is disabled. For details, see {@link BleStopAdv}.
++ *
++ * @since 6
++ */
++typedef void (*AdvDisableCallback)(int advId, int status);
++
++/**
++ * @brief Called when advertising data is set. For details, see {@link BleSetAdvData}.
++ *
++ * @since 6
++ */
++typedef void (*AdvDataCallback)(int advId, int status);
++
++/**
++ * @brief Called when advertising parameters are updated. For details, see {@link BleUpdateAdv}
++ *
++ * @since 6
++ */
++typedef void (*AdvUpdateCallback)(int advId, int status);
++
++/**
++ * @brief Called when a secure access request is received.
++ *
++ * {@link BleGattSecurityRsp} is used to grant the secure access permission.
++ *
++ * @since 6
++ */
++typedef void (*SecurityRespondCallback)(const BdAddr *bdAddr);
++
++/**
++ * @brief Called when the scan result is received.
++ *
++ * @since 6
++ */
++typedef void (*ScanResultCallback)(BtScanResultData *scanResultdata);
++
++/**
++ * @brief Called when scan parameters are set.
++ *
++ * @since 6
++ */
++typedef void (*ScanParameterSetCompletedCallback)(int clientId, int status);
++
++/**
++ * @brief Defines GATT callbacks.
++ *
++ * @since 6
++ */
++typedef struct {
++    /** Called when advertising is enabled. */
++    AdvEnableCallback advEnableCb;
++    /** Called when advertising is disabled. */
++    AdvDisableCallback advDisableCb;
++    /** Called when advertising data is set. */
++    AdvDataCallback advDataCb;
++    /** Called when advertising parameters are updated. */
++    AdvUpdateCallback advUpdateCb;
++    /** Called when a secure access request is received. */
++    SecurityRespondCallback securityRespondCb;
++    /** Called when the scan result is received. */
++    ScanResultCallback scanResultCb;
++    /** Called when scan parameters are set. */
++    ScanParameterSetCompletedCallback scanParamSetCb;
++} BtGattCallbacks;
++
++/**
++ * @brief Initializes the Bluetooth protocol stack.
++ *
++ * @return Returns {@link OHOS_BT_STATUS_SUCCESS} if the Bluetooth protocol stack is initialized;
++ * returns an error code defined in {@link BtStatus} otherwise.
++ * @since 6
++ */
++int InitBtStack(void);
++
++/**
++ * @brief Enables the Bluetooth protocol stack.
++ *
++ * @return Returns {@link OHOS_BT_STATUS_SUCCESS} if the Bluetooth protocol stack is enabled;
++ * returns an error code defined in {@link BtStatus} otherwise.
++ * @since 6
++ */
++int EnableBtStack(void);
++
++/**
++ * @brief Disables the Bluetooth protocol stack.
++ *
++ * @return Returns {@link OHOS_BT_STATUS_SUCCESS} if the Bluetooth protocol stack is disabled;
++ * returns an error code defined in {@link BtStatus} otherwise.
++ * @since 6
++ */
++int DisableBtStack(void);
++
++/**
++ * @brief Sets the Bluetooth device name.
++ *
++ * @param name Indicates the pointer to the name to set.
++ * @param len Indicates the length of the name to set.
++ * @return Returns {@link OHOS_BT_STATUS_SUCCESS} if the Bluetooth device name is set;
++ * returns an error code defined in {@link BtStatus} otherwise.
++ * @since 6
++ */
++int SetDeviceName(const char *name, unsigned int len);
++
++/**
++ * @brief Sets advertising data.
++ *
++ * @param advId Indicates the advertisement ID, which is allocated by the upper layer of the advertiser.
++ * @param data Indicates the pointer to the advertising data. For details, see {@link BleConfigAdvData}.
++ * @return Returns {@link OHOS_BT_STATUS_SUCCESS} if advertising data is set;
++ * returns an error code defined in {@link BtStatus} otherwise.
++ * @since 6
++ */
++int BleSetAdvData(int advId, const BleConfigAdvData *data);
++
++/**
++ * @brief Starts advertising.
++ *
++ * @param advId Indicates the advertisement ID, which is allocated by the upper layer of the advertiser.
++ * @param param Indicates the pointer to the advertising parameters. For details, see {@link BleAdvParams}.
++ * @return Returns {@link OHOS_BT_STATUS_SUCCESS} if advertising is started;
++ * returns an error code defined in {@link BtStatus} otherwise.
++ * @since 6
++ */
++int BleStartAdv(int advId, const BleAdvParams *param);
++
++/**
++ * @brief Stops advertising.
++ *
++ * @param advId Indicates the advertisement ID, which is allocated by the upper layer of the advertiser.
++ * @return Returns {@link OHOS_BT_STATUS_SUCCESS} if advertising is stopped;
++ * returns an error code defined in {@link BtStatus} otherwise.
++ * @since 6
++ */
++int BleStopAdv(int advId);
++
++/**
++ * @brief Updates advertising parameters.
++ *
++ * @param advId Indicates the advertisement ID, which is allocated by the upper layer of the advertiser.
++ * @param param Indicates the pointer to the advertising parameters. For details, see {@link BleAdvParams}.
++ * @return Returns {@link OHOS_BT_STATUS_SUCCESS} if advertising parameters are updated;
++ * returns an error code defined in {@link BtStatus} otherwise.
++ * @since 6
++ */
++int BleUpdateAdv(int advId, const BleAdvParams *param);
++
++/**
++ * @brief Sets the secure I/O capability mode.
++ *
++ * @param mode Indicates the capability mode to set. For details, see {@link BleIoCapMode}.
++ * @return Returns {@link OHOS_BT_STATUS_SUCCESS} if the capability mode is set;
++ * returns an error code defined in {@link BtStatus} otherwise.
++ * @since 6
++ */
++int BleSetSecurityIoCap(BleIoCapMode mode);
++
++/**
++ * @brief Sets the authentication mode for secure connection requests.
++ *
++ * @param mode Indicates the authentication mode to set. For details, see {@link BleAuthReqMode}.
++ * @return Returns {@link OHOS_BT_STATUS_SUCCESS} if the authentication mode is set;
++ * returns an error code defined in {@link BtStatus} otherwise.
++ * @since 6
++ */
++int BleSetSecurityAuthReq(BleAuthReqMode mode);
++
++/**
++ * @brief Responds to a secure connection request.
++ *
++ * @param bdAddr Indicates the address of the device that sends the request.
++ * @param accept Specifies whether to accept the request. The value <b>true</b> means to accept the request,
++ * and <b>false</b> means to reject the request.
++ * @return Returns {@link OHOS_BT_STATUS_SUCCESS} if the request is responded to;
++ * returns an error code defined in {@link BtStatus} otherwise.
++ * @since 6
++ */
++int BleGattSecurityRsp(BdAddr bdAddr, bool accept);
++
++/**
++ * @brief Obtains the device MAC address.
++ *
++ * @param mac Indicates the pointer to the device MAC address.
++ * @param len Indicates the length of the device MAC address.
++ * @return Returns {@link OHOS_BT_STATUS_SUCCESS} if the device MAC address is obtained;
++ * returns an error code defined in {@link BtStatus} otherwise.
++ * @since 6
++ */
++int ReadBtMacAddr(unsigned char *mac, unsigned int len);
++
++/**
++ * @brief Sets scan parameters.
++ *
++ * @param clientId Indicates the client ID, which is obtained during client registration.
++ * @param param Indicates the pointer to the scan parameters. For details, see {@link BleScanParams}.
++ * @return Returns {@link OHOS_BT_STATUS_SUCCESS} if the scan parameters are set;
++ * returns an error code defined in {@link BtStatus} otherwise.
++ * @since 6
++ */
++int BleSetScanParameters(int clientId, BleScanParams *param);
++
++/**
++ * @brief Starts a scan.
++ *
++ * @return Returns {@link OHOS_BT_STATUS_SUCCESS} if the scan is started;
++ * returns an error code defined in {@link BtStatus} otherwise.
++ * @since 6
++ */
++int BleStartScan(void);
++
++/**
++ * @brief Stops a scan.
++ *
++ * @return Returns {@link OHOS_BT_STATUS_SUCCESS} if the scan is stopped;
++ * returns an error code defined in {@link BtStatus} otherwise.
++ * @since 6
++ */
++int BleStopScan(void);
++
++/**
++ * @brief Registers GATT callbacks.
++ *
++ * @param func Indicates the pointer to the callbacks to register. For details, see {@link BtGattCallbacks}.
++ * @return Returns {@link OHOS_BT_STATUS_SUCCESS} if the GATT callbacks are registered;
++ * returns an error code defined in {@link BtStatus} otherwise.
++ * @since 6
++ */
++int BleGattRegisterCallbacks(BtGattCallbacks *func);
++
++/**
++ * @brief Sets advertising data and parameters and starts advertising.
++ *
++ * This function is available for system applications only. \n
++ *
++ * @param advId Indicates the pointer to the advertisement ID.
++ * @param rawData Indicates the advertising data. For details, see {@link StartAdvRawData}.
++ * @param advParam Indicates the advertising parameters. For details, see {@link BleAdvParams}.
++ * @return Returns {@link OHOS_BT_STATUS_SUCCESS} if the operation is successful;
++ * returns an error code defined in {@link BtStatus} otherwise.
++ * @since 6
++ */
++int BleStartAdvEx(int *advId, const StartAdvRawData rawData, BleAdvParams advParam);
++#endif
++/** @} */
+\ No newline at end of file
+diff --git a/code-1.1.0-git/foundation/communication/bluetooth/interfaces/innerkits/native_c/include/ohos_bt_gatt_server.h b/foundation/communication/bluetooth/interfaces/innerkits/native_c/include/ohos_bt_gatt_server.h
+new file mode 100755
+index 0000000..faad06b
+--- /dev/null
++++ b/foundation/communication/bluetooth/interfaces/innerkits/native_c/include/ohos_bt_gatt_server.h
+@@ -0,0 +1,614 @@
++/*
++ * Copyright (c) 2021 Huawei Device Co., Ltd.
++ * Licensed under the Apache License, Version 2.0 (the "License");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *    http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an "AS IS" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ */
++
++/**
++ * @addtogroup Bluetooth
++ * @{
++ *
++ * @brief Provides basic Bluetooth capabilities.
++ *
++ * This module allows you to enable and disable Bluetooth, and access basic Bluetooth capabilities.\n
++ * Bluetooth uses profiles such as BT-GAP, BLE, BLE-GATT, BT-data transmission, HFP, A2DP, AVRCP, MAP, and PBAP.
++ *
++ * @since 6
++ */
++
++/**
++ * @file ohos_bt_gatt_server.h
++ *
++ * @brief Declares basic data structures and functions of the GATT server.
++ *
++ * @since 6
++ */
++
++#ifndef OHOS_BT_GATT_SERVER_H
++#define OHOS_BT_GATT_SERVER_H
++
++#include "ohos_bt_def.h"
++
++/**
++ * @brief Enumerates security encryption types.
++ *
++ * @since 6
++ */
++typedef enum {
++    /** No encryption */
++    OHOS_BLE_SEC_NONE = 0x00,
++    /** Encryption */
++    OHOS_BLE_SEC_ENCRYPT,
++    /** Encryption without MITM */
++    OHOS_BLE_SEC_ENCRYPT_NO_MITM,
++    /** Encryption with MITM */
++    OHOS_BLE_SEC_ENCRYPT_MITM
++} BleSecAct;
++
++/**
++ * @brief Defines the parameters in the response to a read or write request from the client.
++ *
++ * @since 6
++ */
++typedef struct {
++    /** Connection ID */
++    int connectId;
++    /** Read/write status, as enumerated in {@link GattStatus} */
++    int status;
++    /** Attribute handle ID */
++    int attrHandle;
++    /** Length of the response data */
++    int valueLen;
++    /** Response data */
++    char *value;
++} GattsSendRspParam;
++
++/**
++ * @brief Defines the parameters in the indication or notification sent to the client when a characteristic change
++ * occurs on the GATT server.
++ *
++ * @since 6
++ */
++typedef struct {
++    /** Connection ID */
++    int connectId;
++    /** Attribute handle ID */
++    int attrHandle;
++    /**
++     * Whether to send an indication or notification. Value <b>1</b> means to send an indication that requires
++     * a response from the client, and <b>0</b> means to send a notification.
++     */
++    int confirm;
++    /** Length of the data to be sent */
++    int valueLen;
++    /** Data to be sent */
++    char *value;
++} GattsSendIndParam;
++
++/**
++ * @brief Defines the parameters in the callback that is invoked
++ * when the GATT server receives a read request from the client.
++ *
++ * @since 6
++ */
++typedef struct {
++    /** Connection ID */
++    int connId;
++    /** Transport ID, as enumerated in {@link BtTransportId} */
++    int transId;
++    /** Device address */
++    BdAddr *bdAddr;
++    /** Handle ID of the attribute to be read */
++    int attrHandle;
++    /**
++     * Offset to the first byte, from where the data reading starts.
++     * If data is to be read from the beginning, the value is <b>0</b>.
++     */
++    int offset;
++    /** Whether the read request is a long read. Value <b>true</b> indicates a long read. */
++    bool isLong;
++} BtReqReadCbPara;
++
++/**
++ * @brief Defines the parameters in the callback that is invoked when the GATT server
++ * receives a write request from the client.
++ *
++ * @since 6
++ */
++typedef struct {
++    /** Connection ID */
++    int connId;
++    /** Transport ID, as enumerated in {@link BtTransportId} */
++    int transId;
++    /** Device address */
++    BdAddr *bdAddr;
++    /** Handle ID of the attribute to be written */
++    int attrHandle;
++    /**
++     * Offset to the first byte, from where the data writing starts.
++     * If data is to be written from the beginning, the value is <b>0</b>.
++     */
++    int offset;
++    /** Length of the data to be written */
++    int length;
++    /**
++     * Whether the GATT server needs to send a response to the client.
++     * Value <b>true</b> indicates that a response to the client is required,
++     * and <b>false</b> indicates the opposite.
++     */
++    bool needRsp;
++    /**
++     * Whether a prepare write is required.
++     * Value <b>true</b> indicates that it is required, and <b>false</b> indicates the opposite.
++     */
++    bool isPrep;
++    /** Data to be written */
++    unsigned char *value;
++} BtReqWriteCbPara;
++
++/**
++ * @brief Called when a GATT server is registered via {@link BleGattsRegister}.
++ *
++ * @since 6
++ */
++typedef void (*RegisterServerCallback)(int status, int serverId, BtUuid *appUuid);
++
++/**
++ * @brief Called when the GATT server is connected to the client.
++ *
++ * @since 6
++ */
++typedef void (*ConnectServerCallback)(int connId, int serverId, const BdAddr *bdAddr);
++
++/**
++ * @brief Called when the GATT server is disconnected from the client.
++ *
++ * @since 6
++ */
++typedef void (*DisconnectServerCallback)(int connId, int serverId, const BdAddr *bdAddr);
++
++/**
++ * @brief Called when a service is added via {@link BleGattsAddService}.
++ *
++ * @since 6
++ */
++typedef void (*ServiceAddCallback)(int status, int serverId, BtUuid *uuid, int srvcHandle);
++
++/**
++ * @brief Called when an included service is added to a service via {@link BleGattsAddIncludedService}.
++ *
++ * @since 6
++ */
++typedef void (*IncludeServiceAddCallback)(int status, int serverId, int srvcHandle, int includeSrvcHandle);
++
++/**
++ * @brief Called when a characteristic is added to a service via {@link BleGattsAddCharacteristic}.
++ *
++ * @since 6
++ */
++typedef void (*CharacteristicAddCallback)(int status, int serverId, BtUuid *uuid,
++                                          int srvcHandle, int characteristicHandle);
++
++/**
++ * @brief Called when a descriptor is added to a characteristic via {@link BleGattsAddDescriptor}.
++ *
++ * @since 6
++ */
++typedef void (*DescriptorAddCallback)(int status, int serverId, BtUuid *uuid,
++                                      int srvcHandle, int descriptorHandle);
++
++/**
++ * @brief Called when a service is started via {@link BleGattsStartService}.
++ *
++ * @since 6
++ */
++typedef void (*ServiceStartCallback)(int status, int serverId, int srvcHandle);
++
++/**
++ * @brief Called when a service is stopped via {@link BleGattsStopService}.
++ *
++ * @since 6
++ */
++typedef void (*ServiceStopCallback)(int status, int serverId, int srvcHandle);
++
++/**
++ * @brief Called when a service is deleted via {@link BleGattsDeleteService}.
++ *
++ * @since 6
++ */
++typedef void (*ServiceDeleteCallback)(int status, int serverId, int srvcHandle);
++
++/**
++ * @brief Called when the GATT server receives a read request from the client.
++ *
++ * You need to call {@link BleGattsSendResponse} to send a response to the client. \n
++ *
++ * @since 6
++ */
++typedef void (*RequestReadCallback)(BtReqReadCbPara readCbPara);
++
++/**
++ * @brief Called when the GATT server receives a write request from the client.
++ *
++ * You can determine whether to send a response to the client based on the <b>needRsp</b> parameter\n
++ * in {@link BtReqWriteCbPara}.\n
++ * If a response is needed, you can call {@link BleGattsSendResponse} to send a response to the client.
++ *
++ * @since 6
++ */
++typedef void (*RequestWriteCallback)(BtReqWriteCbPara writeCbPara);
++
++/**
++ * @brief Called when the GATT server sends a response to the client via {@link BleGattsSendResponse}.
++ *
++ * @since 6
++ */
++typedef void (*ResponseConfirmationCallback)(int status, int handle);
++
++/**
++ * @brief Called when the GATT server sends an indication or notification to the client
++ * via {@link BleGattsSendIndication}.
++ *
++ * Upon receiving an indication, the client returns a confirmation.\n
++ * When the GATT server receives the confirmation, this callback is invoked.
++ *
++ * Upon receiving a notification, the client does not respond.
++ *
++ * @since 6
++ */
++typedef void (*IndicationSentCallback)(int connId, int status);
++
++/**
++ * @brief Called when the MTU changes.
++ *
++ * @since 6
++ */
++typedef void (*MtuChangeCallback)(int connId, int mtu);
++
++/**
++ * @brief Defines callbacks for the GATT server.
++ *
++ * @since 6
++ */
++typedef struct {
++    /** Callback that is invoked when a GATT server is registered */
++    RegisterServerCallback registerServerCb;
++    /** Callback that is invoked when the GATT server is connected to the client */
++    ConnectServerCallback connectServerCb;
++    /** Callback that is invoked when the GATT server is disconnected from the client */
++    DisconnectServerCallback disconnectServerCb;
++    /** Callback that is invoked when a service is added */
++    ServiceAddCallback serviceAddCb;
++    /** Callback that is invoked when an included service is added */
++    IncludeServiceAddCallback includeServiceAddCb;
++    /** Callback that is invoked when a characteristic is added */
++    CharacteristicAddCallback characteristicAddCb;
++    /** Callback that is invoked when a descriptor is added */
++    DescriptorAddCallback descriptorAddCb;
++    /** Callback that is invoked when a service is started */
++    ServiceStartCallback serviceStartCb;
++    /** Callback that is invoked when a service is stopped */
++    ServiceStopCallback serviceStopCb;
++    /** Callback that is invoked when a service is deleted */
++    ServiceDeleteCallback serviceDeleteCb;
++    /** Callback that is invoked when the GATT server receives a read request from the client */
++    RequestReadCallback requestReadCb;
++    /** Callback that is invoked when the GATT server receives a write request from the client */
++    RequestWriteCallback requestWriteCb;
++    /** Callback that is invoked when the GATT server sends a response to the client */
++    ResponseConfirmationCallback responseConfirmationCb;
++    /** Callback that is invoked when the GATT server sends an indication or notification to the client */
++    IndicationSentCallback indicationSentCb;
++    /** Callback that is invoked when the MTU changes */
++    MtuChangeCallback mtuChangeCb;
++} BtGattServerCallbacks;
++
++/**
++ * @brief Called when the GATT client requests to read data from the GATT server.
++ *
++ * This callback is available for system applications only.
++ *
++ * @since 6
++ */
++typedef int (*BleGattServiceRead)(unsigned char *buff, unsigned int *len);
++
++/**
++ * @brief Called when the GATT client requests to write data to the GATT server.
++ *
++ * This callback is available for system applications only.
++ *
++ * @since 6
++ */
++typedef int (*BleGattServiceWrite)(unsigned char *buff, unsigned int len);
++
++/**
++ * @brief Called when an indication or notification is sent to a service.
++ *
++ * This callback is available for system applications only.
++ *
++ * @since 6
++ */
++typedef int (*BleGattServiceIndicate)(unsigned char *buff, unsigned int len);
++
++/**
++ * @brief Defines callbacks for the operations performed by the GATT client on the GATT server.
++ *
++ * This structure is available for system applications only.
++ *
++ * @since 6
++ */
++typedef struct {
++    /** Callback that is invoked when the GATT client requests to read data from the GATT server */
++    BleGattServiceRead read;
++    /** Callback that is invoked when the GATT client requests to write data to the GATT server */
++    BleGattServiceWrite write;
++    /** Callback that is invoked when an indication or notification is sent to a service */
++    BleGattServiceIndicate indicate;
++} BleGattOperateFunc;
++
++/**
++ * @brief Defines a GATT attribute.
++ *
++ * This structure is available for system applications only.
++ *
++ * @since 6
++ */
++typedef struct {
++    /** Attribute type */
++    BleAttribType attrType;
++    /** Operation permission. For details, see {@link GattAttributePermission}. */
++    unsigned int permission;
++    /** UUID type */
++    UuidType uuidType;
++    /** UUID */
++    unsigned char uuid[OHOS_BLE_UUID_MAX_LEN];
++    /** Data */
++    unsigned char *value;
++    /** Data length */
++    unsigned char valLen;
++    /** Property. For details, see {@link GattCharacteristicProperty}. */
++    unsigned char properties;
++    /** Operation callback */
++    BleGattOperateFunc func;
++} BleGattAttr;
++
++/**
++ * @brief Defines a GATT service.
++ *
++ * This structure is available for system applications only.
++ *
++ * @since 6
++ */
++typedef struct {
++    /** Number of attributes */
++    unsigned int attrNum;
++    /** Attribute list */
++    BleGattAttr *attrList;
++} BleGattService;
++
++/**
++ * @brief Registers a GATT server with a specified application UUID.
++ *
++ * The <b>RegisterServerCallback</b> is invoked to return the GATT server ID.
++ *
++ * @param appUuid Indicates the UUID of the application for which the GATT server is to be registered.
++ * The UUID is defined by the application.
++ * @return Returns {@link OHOS_BT_STATUS_SUCCESS} if the GATT server is registered;
++ * returns an error code defined in {@link BtStatus} otherwise.
++ * @since 6
++ */
++int BleGattsRegister(BtUuid appUuid);
++
++/**
++ * @brief Unregisters a GATT server with a specified ID.
++ *
++ * @param serverId Indicates the ID of the GATT server.
++ * @return Returns {@link OHOS_BT_STATUS_SUCCESS} if the GATT server is unregistered;
++ * returns an error code defined in {@link BtStatus} otherwise.
++ * @since 6
++ */
++int BleGattsUnRegister(int serverId);
++
++/**
++ * @brief Disconnects the GATT server from the client.
++ *
++ * @param serverId Indicates the ID of the GATT server.
++ * @param bdAddr Indicates the address of the client.
++ * @param connId Indicates the connection ID, which is returned during the server registration.
++ * @return Returns {@link OHOS_BT_STATUS_SUCCESS} if the GATT server is disconnected from the client;
++ * returns an error code defined in {@link BtStatus} otherwise.
++ * @since 6
++ */
++int BleGattsDisconnect(int serverId, BdAddr bdAddr, int connId);
++
++/**
++ * @brief Adds a service.
++ *
++ * This function adds the service, its characteristics, and descriptors separately in sequence.\n
++ * A service is a collection of data and related behavior that enable a specific capability or feature.\n
++ * It consists of a service declaration and one or more included services and characteristics.
++ *
++ * @param serverId Indicates the ID of the GATT server.
++ * @param srvcUuid Indicates the UUID of the service.
++ * @param isPrimary Specifies whether the service is primary or secondary.
++ * Value <b>true</b> indicates that the service is primary, and <b>false</b> indicates that the service is secondary.
++ * @param number Indicates the number of attribute handles.
++ * @return Returns {@link OHOS_BT_STATUS_SUCCESS} if the service is added;
++ * returns an error code defined in {@link BtStatus} otherwise.
++ * @since 6
++ */
++int BleGattsAddService(int serverId, BtUuid srvcUuid, bool isPrimary, int number);
++
++/**
++ * @brief Adds an included service to a specified service.
++ *
++ * An included service is referenced to define another service on the GATT server.
++ *
++ * @param serverId Indicates the ID of the GATT server.
++ * @param srvcHandle Indicates the handle ID of the service.
++ * @param includedHandle Indicates the attribute handle ID of the included service.
++ * @return Returns {@link OHOS_BT_STATUS_SUCCESS} if the included service is added to the service;
++ * returns an error code defined in {@link BtStatus} otherwise.
++ * @since 6
++ */
++int BleGattsAddIncludedService(int serverId, int srvcHandle, int includedHandle);
++
++/**
++ * @brief Adds a characteristic to a specified service.
++ *
++ * A characteristic consists of data, the data access method, data format, and how the data manifests itself.
++ *
++ * @param serverId Indicates the ID of the GATT server.
++ * @param srvcHandle Indicates the handle ID of the service.
++ * @param characUuid Indicates the UUID of the characteristic to add.
++ * @param properties Indicates the access methods supported by the characteristic,
++ * as enumerated in {@link GattCharacteristicProperty}.
++ * @param permissions Indicates the access permissions supported by the characteristic,
++ * as enumerated in {@link GattAttributePermission}.
++ * @return Returns {@link OHOS_BT_STATUS_SUCCESS} if the characteristic is added to the service;
++ * returns an error code defined in {@link BtStatus} otherwise.
++ * @since 6
++ */
++int BleGattsAddCharacteristic(int serverId, int srvcHandle, BtUuid characUuid,
++                              int properties, int permissions);
++
++/**
++ * @brief Adds a descriptor to a specified characteristic.
++ *
++ * A descriptor contains the description, configuration, and format of a characteristic.
++ *
++ * @param serverId Indicates the ID of the GATT server.
++ * @param srvcHandle Indicates the handle ID of the service to which the characteristic belongs.
++ * @param descUuid Indicates the UUID of the descriptor to add.
++ * @param permissions Indicates the access permissions supported by the descriptor,
++ * as enumerated in {@link GattAttributePermission}.
++ * @return Returns {@link OHOS_BT_STATUS_SUCCESS} if the descriptor is added to the characteristic;
++ * returns an error code defined in {@link BtStatus} otherwise.
++ * @since 6
++ */
++int BleGattsAddDescriptor(int serverId, int srvcHandle, BtUuid descUuid, int permissions);
++
++/**
++ * @brief Starts a service.
++ *
++ * @param serverId Indicates the ID of the GATT server.
++ * @param srvcHandle Indicates the handle ID of the service.
++ * @return Returns {@link OHOS_BT_STATUS_SUCCESS} if the service is started;
++ * returns an error code defined in {@link BtStatus} otherwise.
++ * @since 6
++ */
++int BleGattsStartService(int serverId, int srvcHandle);
++
++/**
++ * @brief Stops a service.
++ *
++ * @param serverId Indicates the ID of the GATT server.
++ * @param srvcHandle Indicates the handle ID of the service.
++ * @return Returns {@link OHOS_BT_STATUS_SUCCESS} if the service is stopped;
++ * returns an error code defined in {@link BtStatus} otherwise.
++ * @since 6
++ */
++int BleGattsStopService(int serverId, int srvcHandle);
++
++/**
++ * @brief Deletes a service.
++ *
++ * @param serverId Indicates the ID of the GATT server.
++ * @param srvcHandle Indicates the handle ID of the service.
++ * @return Returns {@link OHOS_BT_STATUS_SUCCESS} if the service is deleted;
++ * returns an error code defined in {@link BtStatus} otherwise.
++ * @since 6
++ */
++int BleGattsDeleteService(int serverId, int srvcHandle);
++
++/**
++ * @brief Clears all services.
++ *
++ * @param serverId Indicates the ID of the GATT server.
++ * @return Returns {@link OHOS_BT_STATUS_SUCCESS} if the services are cleared;
++ * returns an error code defined in {@link BtStatus} otherwise.
++ * @since 6
++ */
++int BleGattsClearServices(int serverId);
++
++/**
++ * @brief Sends a response to the client from which a read or write request has been received.
++ *
++ * @param serverId Indicates the ID of the GATT server.
++ * @param param Indicates the pointer to the response parameters. For details, see {@link GattsSendRspParam}.
++ * @return Returns {@link OHOS_BT_STATUS_SUCCESS} if the response is sent;
++ * returns an error code defined in {@link BtStatus} otherwise.
++ * @since 6
++ */
++int BleGattsSendResponse(int serverId, GattsSendRspParam *param);
++
++/**
++ * @brief Sends an indication or notification to the client.
++ *
++ * The <b>confirm</b> field in <b>param</b> determines whether to send an indication or a notification.
++ *
++ * @param serverId Indicates the ID of the GATT server.
++ * @param param Indicates the pointer to the sending parameters. For details, see {@link GattsSendIndParam}.
++ * @return Returns {@link OHOS_BT_STATUS_SUCCESS} if the indication or notification is sent;
++ * returns an error code defined in {@link BtStatus} otherwise.
++ * @since 6
++ */
++int BleGattsSendIndication(int serverId, GattsSendIndParam *param);
++
++/**
++ * @brief Sets the encryption type for the GATT connection.
++ *
++ * @param bdAddr Indicates the address of the client.
++ * @param secAct Indicates the encryption type, as enumerated in {@link BleSecAct}.
++ * @return Returns {@link OHOS_BT_STATUS_SUCCESS} if the encryption type is set;
++ * returns an error code defined in {@link BtStatus} otherwise.
++ * @since 6
++ */
++int BleGattsSetEncryption(BdAddr bdAddr, BleSecAct secAct);
++
++/**
++ * @brief Registers GATT server callbacks.
++ *
++ * @param func Indicates the pointer to the callbacks to register, as enumerated in {@link BtGattServerCallbacks}.
++ * @return Returns {@link OHOS_BT_STATUS_SUCCESS} if the callbacks are registered;
++ * returns an error code defined in {@link BtStatus} otherwise.
++ * @since 6
++ */
++int BleGattsRegisterCallbacks(BtGattServerCallbacks *func);
++
++/**
++ * @brief Adds a service, its characteristics, and descriptors and starts the service.
++ *
++ * This function is available for system applications only.
++ *
++ * @param srvcHandle Indicates the pointer to the handle ID of the service,
++ * which is returned by whoever implements this function.
++ * @param srvcInfo Indicates the pointer to the service information.
++ * @return Returns {@link OHOS_BT_STATUS_SUCCESS} if the operation is successful;
++ * returns an error code defined in {@link BtStatus} otherwise.
++ * @since 6
++ */
++int BleGattsStartServiceEx(int *srvcHandle, BleGattService *srvcInfo);
++
++/**
++ * @brief Stops a service.
++ *
++ * This function is available for system applications only.
++ *
++ * @param srvcHandle Indicates the handle ID of the service.
++ * @return Returns {@link OHOS_BT_STATUS_SUCCESS} if the operation is successful;
++ * returns an error code defined in {@link BtStatus} otherwise.
++ * @since 6
++ */
++int BleGattsStopServiceEx(int srvcHandle);
++#endif
++/** @} */
+\ No newline at end of file
+diff --git a/foundation/communication/softbus_lite/discovery/BUILD.gn b/foundation/communication/softbus_lite/discovery/BUILD.gn
+index 23cdab5..c96569c 100755
+--- a/foundation/communication/softbus_lite/discovery/BUILD.gn
++++ b/foundation/communication/softbus_lite/discovery/BUILD.gn
+@@ -29,6 +29,7 @@ if (ohos_kernel_type == "liteos_m") {
+       "//base/security/deviceauth/interfaces/innerkits/deviceauth_lite",
+       "//third_party/cJSON",
+       "$ohos_third_party_dir/lwip_sack/include",
++      "//base/security/huks/interfaces/innerkits/huks_lite",
+     ]
+   }
+   discovery_sources = [
+diff --git a/foundation/communication/softbus_lite/discovery/coap/source/coap_discover.c b/foundation/communication/softbus_lite/discovery/coap/source/coap_discover.c
+index a85fc5c..be6c244 100644
+--- a/foundation/communication/softbus_lite/discovery/coap/source/coap_discover.c
++++ b/foundation/communication/softbus_lite/discovery/coap/source/coap_discover.c
+@@ -436,7 +436,7 @@ static void CoapConnectionChangedHandler(int state, WifiLinkedInfo* info)
+     (void)info;
+     CoapWriteMsgQueue(state);
+ }
+-
++/*
+ void CoapGetWifiIp(char *ip, int length)
+ {
+     struct netif *netif = NULL;
+@@ -458,6 +458,27 @@ void CoapGetWifiIp(char *ip, int length)
+     (void)length;
+     return;
+ }
++*/
++void CoapGetWifiIp(char *ip, int length)
++{
++    void *netif = NULL;
++    int ret;
++
++    netif = net_get_sta_handle();
++    if (netif == NULL) {
++        return;
++    }
++
++    ip4_addr_t ipAddr;
++
++    ret = net_get_if_ip_addr(&ipAddr, netif);
++    if (ret == 0) {
++        inet_ntop(AF_INET, &ipAddr, ip, INET_ADDRSTRLEN);
++    }
++    (void)length;
++    return;
++}
++
+ #else
+ typedef enum {
+     STATUS_UP,
+diff --git a/foundation/communication/softbus_lite/trans_service/BUILD.gn b/foundation/communication/softbus_lite/trans_service/BUILD.gn
+index 319cdef..f98f096 100755
+--- a/foundation/communication/softbus_lite/trans_service/BUILD.gn
++++ b/foundation/communication/softbus_lite/trans_service/BUILD.gn
+@@ -30,6 +30,7 @@ if (ohos_kernel_type == "liteos_m") {
+       "//third_party/bounds_checking_function/include",
+       "$ohos_third_party_dir/lwip_sack/include",
+       "$ohos_third_party_dir/mbedtls/include",
++      "//base/security/huks/interfaces/innerkits/huks_lite",
+     ]
+ 
+     defines = [ "SOFTBUS_DEBUG" ]
+diff --git a/code-1.1.0-git/foundation/communication/softbus_lite/trans_service/include/utils/lwip_if.h b/foundation/communication/softbus_lite/trans_service/include/utils/lwip_if.h
+new file mode 100644
+index 0000000..9ef4504
+--- /dev/null
++++ b/foundation/communication/softbus_lite/trans_service/include/utils/lwip_if.h
+@@ -0,0 +1,87 @@
++#ifndef __LWIP_IF_H__
++#define __LWIP_IF_H__
++
++#include <sys/select.h>
++
++struct ip4_addr {
++  unsigned int addr;
++};
++typedef struct ip4_addr ip4_addr_t;
++
++int lwip_accept(int s, struct sockaddr *addr, socklen_t *addrlen);
++int lwip_bind(int s, const struct sockaddr *name, socklen_t namelen);
++int lwip_shutdown(int s, int how);
++int lwip_getpeername (int s, struct sockaddr *name, socklen_t *namelen);
++int lwip_getsockname (int s, struct sockaddr *name, socklen_t *namelen);
++int lwip_getsockopt (int s, int level, int optname, void *optval, socklen_t *optlen);
++int lwip_setsockopt (int s, int level, int optname, const void *optval, socklen_t optlen);
++int lwip_close(int s);
++int lwip_connect(int s, const struct sockaddr *name, socklen_t namelen);
++int lwip_listen(int s, int backlog);
++int lwip_recv(int s, void *mem, size_t len, int flags);
++int lwip_read(int s, void *mem, size_t len);
++int lwip_recvfrom(int s, void *mem, size_t len, int flags,
++      struct sockaddr *from, socklen_t *fromlen);
++int lwip_send(int s, const void *dataptr, size_t size, int flags);
++int lwip_sendmsg(int s, const struct msghdr *message, int flags);
++int lwip_sendto(int s, const void *dataptr, size_t size, int flags,
++    const struct sockaddr *to, socklen_t tolen);
++int lwip_socket(int domain, int type, int protocol);
++int lwip_write(int s, const void *dataptr, size_t size);
++int lwip_writev(int s, const struct iovec *iov, int iovcnt);
++int lwip_select(int maxfdp1, fd_set *readset, fd_set *writeset, fd_set *exceptset,
++                struct timeval *timeout);
++int lwip_ioctl(int s, long cmd, void *argp);
++int lwip_fcntl(int s, int cmd, int val);
++
++#define accept(s,addr,addrlen)                    lwip_accept(s,addr,addrlen)
++/** @ingroup socket */
++#define bind(s,name,namelen)                      lwip_bind(s,name,namelen)
++/** @ingroup socket */
++#define shutdown(s,how)                           lwip_shutdown(s,how)
++/** @ingroup socket */
++#define getpeername(s,name,namelen)               lwip_getpeername(s,name,namelen)
++/** @ingroup socket */
++#define getsockname(s,name,namelen)               lwip_getsockname(s,name,namelen)
++/** @ingroup socket */
++#define setsockopt(s,level,optname,opval,optlen)  lwip_setsockopt(s,level,optname,opval,optlen)
++/** @ingroup socket */
++#define getsockopt(s,level,optname,opval,optlen)  lwip_getsockopt(s,level,optname,opval,optlen)
++/** @ingroup socket */
++#define closesocket(s)                            lwip_close(s)
++/** @ingroup socket */
++#define connect(s,name,namelen)                   lwip_connect(s,name,namelen)
++/** @ingroup socket */
++#define listen(s,backlog)                         lwip_listen(s,backlog)
++/** @ingroup socket */
++#define recv(s,mem,len,flags)                     lwip_recv(s,mem,len,flags)
++/** @ingroup socket */
++#define recvfrom(s,mem,len,flags,from,fromlen)    lwip_recvfrom(s,mem,len,flags,from,fromlen)
++/** @ingroup socket */
++#define send(s,dataptr,size,flags)                lwip_send(s,dataptr,size,flags)
++/** @ingroup socket */
++#define sendmsg(s,message,flags)                  lwip_sendmsg(s,message,flags)
++/** @ingroup socket */
++#define sendto(s,dataptr,size,flags,to,tolen)     lwip_sendto(s,dataptr,size,flags,to,tolen)
++/** @ingroup socket */
++#define socket(domain,type,protocol)              lwip_socket(domain,type,protocol)
++/** @ingroup socket */
++#define select(maxfdp1,readset,writeset,exceptset,timeout)     lwip_select(maxfdp1,readset,writeset,exceptset,timeout)
++
++
++#define inet_ntop(af,src,dst,size) \
++    (((af) == AF_INET) ? ip4addr_ntoa_r((const ip4_addr_t*)(src),(dst),(size)) : NULL)
++#define inet_pton(af,src,dst) \
++    (((af) == AF_INET) ? ip4addr_aton((src),(ip4_addr_t*)(dst)) : 0)
++
++#define inet_ntoa(addr) ip4addr_ntoa((addr))
++
++#define lwip_ntohs(x) lwip_htons(x)
++
++#define htons(x) lwip_htons(x)
++#define ntohs(x) lwip_ntohs(x)
++#define htonl(x) lwip_htonl(x)
++#define ntohl(x) lwip_ntohl(x)
++
++
++#endif
+diff --git a/foundation/communication/softbus_lite/trans_service/source/libdistbus/auth_conn_manager.c b/foundation/communication/softbus_lite/trans_service/source/libdistbus/auth_conn_manager.c
+index e77dcdd..0f6a7aa 100644
+--- a/foundation/communication/softbus_lite/trans_service/source/libdistbus/auth_conn_manager.c
++++ b/foundation/communication/softbus_lite/trans_service/source/libdistbus/auth_conn_manager.c
+@@ -15,8 +15,8 @@
+ 
+ #include "auth_conn_manager.h"
+ 
+-#include <arpa/inet.h>
+-#if defined(__LITEOS_M__) || defined(__LITEOS_RISCV__)
++//#include <arpa/inet.h>
++#if defined(__LITEOS_M__X) || defined(__LITEOS_RISCV__)
+ #include <cmsis_os.h>
+ #include <lwip/sockets.h>
+ #else
+@@ -25,7 +25,10 @@
+ #include <signal.h>
+ #include <sys/socket.h>
+ #include <sys/time.h>
++#include <netinet/in.h>
+ #endif
++#include "lwip_if.h"
++
+ #include <stdbool.h>
+ #include <string.h>
+ #include <sys/ioctl.h>
+diff --git a/foundation/communication/softbus_lite/trans_service/source/libdistbus/tcp_session_manager.c b/foundation/communication/softbus_lite/trans_service/source/libdistbus/tcp_session_manager.c
+index 63edbe6..e14fd12 100644
+--- a/foundation/communication/softbus_lite/trans_service/source/libdistbus/tcp_session_manager.c
++++ b/foundation/communication/softbus_lite/trans_service/source/libdistbus/tcp_session_manager.c
+@@ -23,6 +23,8 @@
+ #include "pms_interface.h"
+ #include "pms_types.h"
+ #endif
++#include "lwip_if.h"
++
+ #include <malloc.h>
+ #include <mbedtls/base64.h>
+ #include <signal.h>
+diff --git a/foundation/communication/softbus_lite/trans_service/source/utils/tcp_socket.c b/foundation/communication/softbus_lite/trans_service/source/utils/tcp_socket.c
+index 8f958f3..5565e58 100644
+--- a/foundation/communication/softbus_lite/trans_service/source/utils/tcp_socket.c
++++ b/foundation/communication/softbus_lite/trans_service/source/utils/tcp_socket.c
+@@ -16,11 +16,13 @@
+ 
+ #include <arpa/inet.h>
+ 
+-#if defined(__LITEOS_M__) || defined(__LITEOS_RISCV__)
++#if defined(__LITEOS_M__X) || defined(__LITEOS_RISCV__)
+ #include <lwip/sockets.h>
+ #else
+ #include <sys/socket.h>
+ #endif
++#include <netinet/in.h>
++#include "lwip_if.h"
+ 
+ #include <errno.h>
+ #include <netinet/in.h>
+diff --git a/foundation/communication/wifi_lite/interfaces/wifiservice/wifi_device_config.h b/foundation/communication/wifi_lite/interfaces/wifiservice/wifi_device_config.h
+index b7037a7..fae12d0 100644
+--- a/foundation/communication/wifi_lite/interfaces/wifiservice/wifi_device_config.h
++++ b/foundation/communication/wifi_lite/interfaces/wifiservice/wifi_device_config.h
+@@ -46,7 +46,7 @@
+  * If the maximum number is reached, an error will be returned. In this case, you must delete at least one
+  * configuration before you can add new ones. \n
+  */
+-#define WIFI_MAX_CONFIG_SIZE 10
++#define WIFI_MAX_CONFIG_SIZE 5
+ /**
+  * @brief Indicates the value of <b>networkId</b> when the configuration file is unavailable.
+  *
+diff --git a/foundation/communication/wifi_lite/interfaces/wifiservice/wifi_hotspot_config.h b/foundation/communication/wifi_lite/interfaces/wifiservice/wifi_hotspot_config.h
+index 1f0b766..8911ff1 100644
+--- a/foundation/communication/wifi_lite/interfaces/wifiservice/wifi_hotspot_config.h
++++ b/foundation/communication/wifi_lite/interfaces/wifiservice/wifi_hotspot_config.h
+@@ -43,7 +43,7 @@
+ /**
+  * @brief Defines the maximum number of stations connected to a hotspot.
+  */
+-#define WIFI_MAX_STA_NUM 6
++#define WIFI_MAX_STA_NUM 1
+ 
+ /**
+  * @brief Enumerates received signal strength indicator (RSSI) levels.

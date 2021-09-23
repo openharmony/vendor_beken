@@ -1,0 +1,19 @@
+diff --git a/third_party/bounds_checking_function/BUILD.gn b/third_party/bounds_checking_function/BUILD.gn
+index 09f527b..8dc638b 100755
+--- a/third_party/bounds_checking_function/BUILD.gn
++++ b/third_party/bounds_checking_function/BUILD.gn
+@@ -65,10 +65,13 @@ libsec_sources = [
+   "//third_party/bounds_checking_function/src/wscanf_s.c",
+ ]
+ 
++libsec_sources_dummy = [
++]
++
+ if (defined(ohos_lite)) {
+   lite_library("libsec_static") {
+     target_type = "static_library"
+-    sources = libsec_sources
++    sources = libsec_sources_dummy
+     public_configs = [ ":libsec_public_config" ]
+   }
+ 
