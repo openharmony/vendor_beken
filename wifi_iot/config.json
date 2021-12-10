@@ -43,6 +43,17 @@
           { "component": "ohos_entry", "features":[] },
           { "component": "bk7231_sdk", "features":[] }
         ]
+      },
+      {
+        "subsystem": "security",
+        "components": [
+          { "component": "hichainsdk", "features":[] },
+		  { "component": "huks", "features":[
+		     "disable_huks_binary = true",
+		     "disable_authenticate = true"
+		    ]
+		  }
+        ]
       }
     ],
     "vendor_adapter_dir": "//device/bk_corp/bk7231/bk7231_adapter",

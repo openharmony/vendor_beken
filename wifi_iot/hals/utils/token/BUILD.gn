@@ -17,6 +17,7 @@ static_library("hal_token_static") {
   include_dirs = [
     "//base/startup/syspara_lite/hals",
     "//utils/native/lite/include",
+    "//device/bk_corp/bk7231/bk7231_sdk/ohos/hilink/include",
   ]
   deps = []
 }

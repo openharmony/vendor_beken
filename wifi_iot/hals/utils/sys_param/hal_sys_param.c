@@ -1,19 +1,7 @@
 #include "hal_sys_param.h"
 #include <securec.h>
+#include "hilink_device.h"
 
-static const char OHOS_PRODUCT_TYPE[] = {"wifi"};
-static const char OHOS_MANUFACTURE[] = {"beken sz"};
-static const char OHOS_BRAND[] = {"beken"};
-static const char OHOS_MARKET_NAME[] = {"bk wifi iot"};
-static const char OHOS_PRODUCT_SERIES[] = {"bk iot with wifi"};
-static const char OHOS_PRODUCT_MODEL[] = {"wifi_iot"};
-static const char OHOS_SOFTWARE_MODEL[] = {"bk sw"};
-static const char OHOS_HARDWARE_MODEL[] = {"bk hw"};
-static const char OHOS_HARDWARE_PROFILE[] = {"wifi:true,ble:true"};
-static const char OHOS_BOOTLOADER_VERSION[] = {"bootloader_bk72xx_uart2_v1.0.8"};
-static const char OHOS_SECURITY_PATCH_TAG[] = {"2021-07-15"};
-static const char OHOS_ABI_LIST[] = {"kal,rtos_pub"};
-static const char OHOS_SERIAL[] = {"1234567890"};
 
 char* HalGetProductType(void)
 {
@@ -30,11 +18,11 @@ char* HalGetProductType(void)
 
 char* HalGetManufacture(void)
 {
-    char* value = (char*)malloc(strlen(OHOS_MANUFACTURE) + 1);
+    char* value = (char*)malloc(strlen(MANUAFACTURER_NAME) + 1);
     if (value == NULL) {
         return NULL;
     }
-    if (strcpy_s(value, strlen(OHOS_MANUFACTURE) + 1, OHOS_MANUFACTURE) != 0) {
+    if (strcpy_s(value, strlen(MANUAFACTURER_NAME) + 1, MANUAFACTURER_NAME) != 0) {
         free(value);
         return NULL;
     }
@@ -82,11 +70,11 @@ char* HalGetProductSeries(void)
 
 char* HalGetProductModel(void)
 {
-    char* value = (char*)malloc(strlen(OHOS_PRODUCT_MODEL) + 1);
+    char* value = (char*)malloc(strlen(PRODUCT_MODEL) + 1);
     if (value == NULL) {
         return NULL;
     }
-    if (strcpy_s(value, strlen(OHOS_PRODUCT_MODEL) + 1, OHOS_PRODUCT_MODEL) != 0) {
+    if (strcpy_s(value, strlen(PRODUCT_MODEL) + 1, PRODUCT_MODEL) != 0) {
         free(value);
         return NULL;
     }
@@ -95,11 +83,11 @@ char* HalGetProductModel(void)
 
 char* HalGetSoftwareModel(void)
 {
-    char* value = (char*)malloc(strlen(OHOS_SOFTWARE_MODEL) + 1);
+    char* value = (char*)malloc(strlen(SOFTWARE_VER) + 1);
     if (value == NULL) {
         return NULL;
     }
-    if (strcpy_s(value, strlen(OHOS_SOFTWARE_MODEL) + 1, OHOS_SOFTWARE_MODEL) != 0) {
+    if (strcpy_s(value, strlen(SOFTWARE_VER) + 1, SOFTWARE_VER) != 0) {
         free(value);
         return NULL;
     }
@@ -108,11 +96,11 @@ char* HalGetSoftwareModel(void)
 
 char* HalGetHardwareModel(void)
 {
-    char* value = (char*)malloc(strlen(OHOS_HARDWARE_MODEL) + 1);
+    char* value = (char*)malloc(strlen(HARDWARE_VER) + 1);
     if (value == NULL) {
         return NULL;
     }
-    if (strcpy_s(value, strlen(OHOS_HARDWARE_MODEL) + 1, OHOS_HARDWARE_MODEL) != 0) {
+    if (strcpy_s(value, strlen(HARDWARE_VER) + 1, HARDWARE_VER) != 0) {
         free(value);
         return NULL;
     }

@@ -3,5 +3,6 @@ static_library("hal_sysparam") {
   include_dirs = [
     "//base/startup/syspara_lite/hals",
     "//utils/native/lite/include",
+    "//device/bk_corp/bk7231/bk7231_sdk/ohos/hilink/include",
   ]
 }

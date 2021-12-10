@@ -1,0 +1,33 @@
+diff --git a/third_party/cJSON/Makefile b/third_party/cJSON/Makefile
+index b14323059..3f0db43b4 100644
+--- a/third_party/cJSON/Makefile
++++ b/third_party/cJSON/Makefile
+@@ -24,14 +24,17 @@ INSTALL_LIBRARY_PATH = $(DESTDIR)$(PREFIX)/$(LIBRARY_PATH)
+ 
+ INSTALL ?= cp -a
+ 
+-CC = gcc -std=c89
++#CC = gcc -std=c89
++CC = arm-none-eabi-gcc -std=c89
++AR = arm-none-eabi-ar
+ 
+ # validate gcc version for use fstack-protector-strong
+ MIN_GCC_VERSION = "4.9"
+ GCC_VERSION := "`$(CC) -dumpversion`"
+ IS_GCC_ABOVE_MIN_VERSION := $(shell expr "$(GCC_VERSION)" ">=" "$(MIN_GCC_VERSION)")
+ ifeq "$(IS_GCC_ABOVE_MIN_VERSION)" "1"
+-    CFLAGS += -fstack-protector-strong
++    CFLAGS += -fno-stack-protector
++    #-fstack-protector-strong
+ else
+     CFLAGS += -fstack-protector
+ endif
+@@ -68,7 +71,7 @@ SHARED_CMD = $(CC) -shared -o
+ 
+ .PHONY: all shared static tests clean install
+ 
+-all: shared static tests
++all: shared static #tests
+ 
+ shared: $(CJSON_SHARED) $(UTILS_SHARED)
+ 
