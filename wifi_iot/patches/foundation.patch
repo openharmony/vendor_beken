@@ -1,6 +1,6 @@
-diff --git a/code-1.1.0-git/foundation/communication/bluetooth/interfaces/innerkits/native_c/include/ohos_bt_def.h b/foundation/communication/bluetooth/interfaces/innerkits/native_c/include/ohos_bt_def.h
+diff --git a/foundation/communication/bluetooth/interfaces/innerkits/native_c/include/ohos_bt_def.h b/foundation/communication/bluetooth/interfaces/innerkits/native_c/include/ohos_bt_def.h
 new file mode 100755
-index 0000000..8bd4b46
+index 000000000..8bd4b460c
 --- /dev/null
 +++ b/foundation/communication/bluetooth/interfaces/innerkits/native_c/include/ohos_bt_def.h
 @@ -0,0 +1,323 @@
@@ -327,9 +327,9 @@ index 0000000..8bd4b46
 +} BtUuid;
 +#endif
 +/** @} */
-diff --git a/code-1.1.0-git/foundation/communication/bluetooth/interfaces/innerkits/native_c/include/ohos_bt_gatt.h b/foundation/communication/bluetooth/interfaces/innerkits/native_c/include/ohos_bt_gatt.h
+diff --git a/foundation/communication/bluetooth/interfaces/innerkits/native_c/include/ohos_bt_gatt.h b/foundation/communication/bluetooth/interfaces/innerkits/native_c/include/ohos_bt_gatt.h
 new file mode 100755
-index 0000000..d8f143a
+index 000000000..d8f143ac0
 --- /dev/null
 +++ b/foundation/communication/bluetooth/interfaces/innerkits/native_c/include/ohos_bt_gatt.h
 @@ -0,0 +1,645 @@
@@ -979,9 +979,9 @@ index 0000000..d8f143a
 +#endif
 +/** @} */
 \ No newline at end of file
-diff --git a/code-1.1.0-git/foundation/communication/bluetooth/interfaces/innerkits/native_c/include/ohos_bt_gatt_server.h b/foundation/communication/bluetooth/interfaces/innerkits/native_c/include/ohos_bt_gatt_server.h
+diff --git a/foundation/communication/bluetooth/interfaces/innerkits/native_c/include/ohos_bt_gatt_server.h b/foundation/communication/bluetooth/interfaces/innerkits/native_c/include/ohos_bt_gatt_server.h
 new file mode 100755
-index 0000000..faad06b
+index 000000000..faad06bdf
 --- /dev/null
 +++ b/foundation/communication/bluetooth/interfaces/innerkits/native_c/include/ohos_bt_gatt_server.h
 @@ -0,0 +1,614 @@
@@ -1601,7 +1601,7 @@ index 0000000..faad06b
 +/** @} */
 \ No newline at end of file
 diff --git a/foundation/communication/softbus_lite/discovery/BUILD.gn b/foundation/communication/softbus_lite/discovery/BUILD.gn
-index 23cdab5..c96569c 100755
+index 23cdab583..c96569c51 100755
 --- a/foundation/communication/softbus_lite/discovery/BUILD.gn
 +++ b/foundation/communication/softbus_lite/discovery/BUILD.gn
 @@ -29,6 +29,7 @@ if (ohos_kernel_type == "liteos_m") {
@@ -1613,7 +1613,7 @@ index 23cdab5..c96569c 100755
    }
    discovery_sources = [
 diff --git a/foundation/communication/softbus_lite/discovery/coap/source/coap_discover.c b/foundation/communication/softbus_lite/discovery/coap/source/coap_discover.c
-index a85fc5c..be6c244 100644
+index a85fc5c4d..be6c24454 100644
 --- a/foundation/communication/softbus_lite/discovery/coap/source/coap_discover.c
 +++ b/foundation/communication/softbus_lite/discovery/coap/source/coap_discover.c
 @@ -436,7 +436,7 @@ static void CoapConnectionChangedHandler(int state, WifiLinkedInfo* info)
@@ -1654,7 +1654,7 @@ index a85fc5c..be6c244 100644
  typedef enum {
      STATUS_UP,
 diff --git a/foundation/communication/softbus_lite/trans_service/BUILD.gn b/foundation/communication/softbus_lite/trans_service/BUILD.gn
-index 319cdef..f98f096 100755
+index 319cdef67..f98f096b4 100755
 --- a/foundation/communication/softbus_lite/trans_service/BUILD.gn
 +++ b/foundation/communication/softbus_lite/trans_service/BUILD.gn
 @@ -30,6 +30,7 @@ if (ohos_kernel_type == "liteos_m") {
@@ -1665,9 +1665,9 @@ index 319cdef..f98f096 100755
      ]
  
      defines = [ "SOFTBUS_DEBUG" ]
-diff --git a/code-1.1.0-git/foundation/communication/softbus_lite/trans_service/include/utils/lwip_if.h b/foundation/communication/softbus_lite/trans_service/include/utils/lwip_if.h
-new file mode 100644
-index 0000000..9ef4504
+diff --git a/foundation/communication/softbus_lite/trans_service/include/utils/lwip_if.h b/foundation/communication/softbus_lite/trans_service/include/utils/lwip_if.h
+new file mode 100755
+index 000000000..9ef450478
 --- /dev/null
 +++ b/foundation/communication/softbus_lite/trans_service/include/utils/lwip_if.h
 @@ -0,0 +1,87 @@
@@ -1759,7 +1759,7 @@ index 0000000..9ef4504
 +
 +#endif
 diff --git a/foundation/communication/softbus_lite/trans_service/source/libdistbus/auth_conn_manager.c b/foundation/communication/softbus_lite/trans_service/source/libdistbus/auth_conn_manager.c
-index e77dcdd..0f6a7aa 100644
+index e77dcdd6d..0f6a7aa06 100644
 --- a/foundation/communication/softbus_lite/trans_service/source/libdistbus/auth_conn_manager.c
 +++ b/foundation/communication/softbus_lite/trans_service/source/libdistbus/auth_conn_manager.c
 @@ -15,8 +15,8 @@
@@ -1785,7 +1785,7 @@ index e77dcdd..0f6a7aa 100644
  #include <string.h>
  #include <sys/ioctl.h>
 diff --git a/foundation/communication/softbus_lite/trans_service/source/libdistbus/tcp_session_manager.c b/foundation/communication/softbus_lite/trans_service/source/libdistbus/tcp_session_manager.c
-index 63edbe6..e14fd12 100644
+index 63edbe674..e14fd1232 100644
 --- a/foundation/communication/softbus_lite/trans_service/source/libdistbus/tcp_session_manager.c
 +++ b/foundation/communication/softbus_lite/trans_service/source/libdistbus/tcp_session_manager.c
 @@ -23,6 +23,8 @@
@@ -1798,7 +1798,7 @@ index 63edbe6..e14fd12 100644
  #include <mbedtls/base64.h>
  #include <signal.h>
 diff --git a/foundation/communication/softbus_lite/trans_service/source/utils/tcp_socket.c b/foundation/communication/softbus_lite/trans_service/source/utils/tcp_socket.c
-index 8f958f3..5565e58 100644
+index 8f958f339..5565e5832 100644
 --- a/foundation/communication/softbus_lite/trans_service/source/utils/tcp_socket.c
 +++ b/foundation/communication/softbus_lite/trans_service/source/utils/tcp_socket.c
 @@ -16,11 +16,13 @@
@@ -1817,7 +1817,7 @@ index 8f958f3..5565e58 100644
  #include <errno.h>
  #include <netinet/in.h>
 diff --git a/foundation/communication/wifi_lite/interfaces/wifiservice/wifi_device_config.h b/foundation/communication/wifi_lite/interfaces/wifiservice/wifi_device_config.h
-index b7037a7..fae12d0 100644
+index b7037a7ee..fae12d0e4 100644
 --- a/foundation/communication/wifi_lite/interfaces/wifiservice/wifi_device_config.h
 +++ b/foundation/communication/wifi_lite/interfaces/wifiservice/wifi_device_config.h
 @@ -46,7 +46,7 @@
@@ -1830,7 +1830,7 @@ index b7037a7..fae12d0 100644
   * @brief Indicates the value of <b>networkId</b> when the configuration file is unavailable.
   *
 diff --git a/foundation/communication/wifi_lite/interfaces/wifiservice/wifi_hotspot_config.h b/foundation/communication/wifi_lite/interfaces/wifiservice/wifi_hotspot_config.h
-index 1f0b766..8911ff1 100644
+index 1f0b7663e..8911ff122 100644
 --- a/foundation/communication/wifi_lite/interfaces/wifiservice/wifi_hotspot_config.h
 +++ b/foundation/communication/wifi_lite/interfaces/wifiservice/wifi_hotspot_config.h
 @@ -43,7 +43,7 @@
@@ -1842,3 +1842,27 @@ index 1f0b766..8911ff1 100644
  
  /**
   * @brief Enumerates received signal strength indicator (RSSI) levels.
+diff --git a/foundation/communication/wifi_lite/interfaces/wifiservice/wifi_linked_info.h b/foundation/communication/wifi_lite/interfaces/wifiservice/wifi_linked_info.h
+index e4c84572c..065332bcc 100644
+--- a/foundation/communication/wifi_lite/interfaces/wifiservice/wifi_linked_info.h
++++ b/foundation/communication/wifi_lite/interfaces/wifiservice/wifi_linked_info.h
+@@ -72,6 +72,7 @@ typedef struct {
+     WifiConnState connState;
+     /** Reason for Wi-Fi disconnection */
+     unsigned short disconnectedReason;
++	int ipAddress;
+ } WifiLinkedInfo;
+ #endif // _WIFI_LINKED_INFO_H
+ /** @} */
+diff --git a/foundation/distributedschedule/samgr_lite/communication/broadcast/source/broadcast_service.c b/foundation/distributedschedule/samgr_lite/communication/broadcast/source/broadcast_service.c
+index 467126f3b..b7a1dde40 100755
+--- a/foundation/distributedschedule/samgr_lite/communication/broadcast/source/broadcast_service.c
++++ b/foundation/distributedschedule/samgr_lite/communication/broadcast/source/broadcast_service.c
+@@ -66,6 +66,6 @@ static BOOL MessageHandle(Service *service, Request *request)
+ static TaskConfig GetTaskConfig(Service *service)
+ {
+     (void)service;
+-    TaskConfig config = {LEVEL_HIGH, PRI_ABOVE_NORMAL, 0x800, 40, SPECIFIED_TASK};
++    TaskConfig config = {LEVEL_HIGH, PRI_ABOVE_NORMAL, 0x200, 40, SPECIFIED_TASK};
+     return config;
+ }

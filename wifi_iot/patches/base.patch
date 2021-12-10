@@ -1,5 +1,19 @@
+diff --git a/base/security/deviceauth/frameworks/deviceauth_lite/source/BUILD.gn b/base/security/deviceauth/frameworks/deviceauth_lite/source/BUILD.gn
+index 0c9b2bf34..c8b130067 100755
+--- a/base/security/deviceauth/frameworks/deviceauth_lite/source/BUILD.gn
++++ b/base/security/deviceauth/frameworks/deviceauth_lite/source/BUILD.gn
+@@ -81,6 +81,9 @@ config("hichain_config") {
+     "_CUT_REMOVE_",
+     "_CUT_ADD_",
+     "_CUT_LOG_",
++    "_CUT_STS_SERVER_",
++    "_CUT_STS_",
++    "_CUT_EXCHANGE_",
+   ]
+ }
+ 
 diff --git a/base/security/huks/frameworks/huks_lite/BUILD.gn b/base/security/huks/frameworks/huks_lite/BUILD.gn
-index 772e467..1975275 100755
+index 772e46733..197527571 100755
 --- a/base/security/huks/frameworks/huks_lite/BUILD.gn
 +++ b/base/security/huks/frameworks/huks_lite/BUILD.gn
 @@ -17,7 +17,7 @@ import("//build/lite/config/component/lite_component.gni")
@@ -12,10 +26,10 @@ index 772e467..1975275 100755
      features = [ "source:huks" ]
    }
 diff --git a/base/security/huks/frameworks/huks_lite/source/BUILD.gn b/base/security/huks/frameworks/huks_lite/source/BUILD.gn
-index ab7104a..9f9364f 100755
+index ab7104a4c..38b66de05 100755
 --- a/base/security/huks/frameworks/huks_lite/source/BUILD.gn
 +++ b/base/security/huks/frameworks/huks_lite/source/BUILD.gn
-@@ -21,6 +21,7 @@ config("soft_huks_config") {
+@@ -21,13 +21,12 @@ config("soft_huks_config") {
      "hw_keystore_sdk/soft_service",
      "//third_party/bounds_checking_function/include",
      "//base/security/huks/interfaces/innerkits/huks_lite",
@@ -23,7 +37,14 @@ index ab7104a..9f9364f 100755
    ]
  
    defines = [ "_FORTIFY_SOURCE = 2" ]
-@@ -36,7 +37,7 @@ config("public_huks_config") {
+ 
+   cflags = [
+-    "-fvisibility=hidden",
+-    "-flto",
+     "-Wall",
+   ]
+ }
+@@ -36,7 +35,7 @@ config("public_huks_config") {
    include_dirs = [ "//base/security/huks/interfaces/innerkits/huks_lite" ]
  }
  
@@ -32,7 +53,7 @@ index ab7104a..9f9364f 100755
    sources = [
      "hw_keystore_sdk/common/hks_bn.c",
      "hw_keystore_sdk/common/hks_common.c",
-@@ -53,10 +54,7 @@ shared_library("huks") {
+@@ -53,9 +52,6 @@ shared_library("huks") {
    configs += [ ":soft_huks_config" ]
  
    public_deps = [
@@ -42,11 +63,8 @@ index ab7104a..9f9364f 100755
    ]
  
    public_configs = [ ":public_huks_config" ]
--}
-+}
-\ No newline at end of file
 diff --git a/base/security/huks/frameworks/huks_lite/source/hw_keystore_sdk/common/hks_common.h b/base/security/huks/frameworks/huks_lite/source/hw_keystore_sdk/common/hks_common.h
-index 8a7fb4c..986a2d5 100755
+index 8a7fb4cfc..986a2d545 100755
 --- a/base/security/huks/frameworks/huks_lite/source/hw_keystore_sdk/common/hks_common.h
 +++ b/base/security/huks/frameworks/huks_lite/source/hw_keystore_sdk/common/hks_common.h
 @@ -34,6 +34,7 @@
@@ -58,7 +76,7 @@ index 8a7fb4c..986a2d5 100755
  #include "hks_hardware_api.h"
  
 diff --git a/base/security/huks/frameworks/huks_lite/source/hw_keystore_sdk/soft_service/hks_service.c b/base/security/huks/frameworks/huks_lite/source/hw_keystore_sdk/soft_service/hks_service.c
-index 0d4b8b7..d35202e 100755
+index 0d4b8b740..6728ed99c 100755
 --- a/base/security/huks/frameworks/huks_lite/source/hw_keystore_sdk/soft_service/hks_service.c
 +++ b/base/security/huks/frameworks/huks_lite/source/hw_keystore_sdk/soft_service/hks_service.c
 @@ -15,7 +15,7 @@
@@ -76,18 +94,18 @@ index 0d4b8b7..d35202e 100755
  
 +static void ED25519_public_from_private(char *dst, char *src)
 +{
-+	printf("dummy ED25519_public_from_private\n");
++	//printf("dummy ED25519_public_from_private\n");
 +	return;
 +}
 +
 +static int ED25519_sign(uint8_t *signature, uint8_t *hash, int hash_size, uint8_t *private_key, uint8_t *private_key2)
 +{
-+	return HKS_BOOL_FALSE;
++	return HKS_BOOL_TRUE;
 +}
 +
 +static int ED25519_verify(uint8_t *hash, int hash_size, uint8_t *signature, uint8_t *public_key)
 +{
-+	return HKS_BOOL_FALSE;
++	return HKS_BOOL_TRUE;
 +}
 +
 +
@@ -95,7 +113,7 @@ index 0d4b8b7..d35202e 100755
      const struct hks_key_param *key_param)
  {
 diff --git a/base/security/huks/frameworks/huks_lite/source/hw_keystore_sdk/soft_service/hks_storage.c b/base/security/huks/frameworks/huks_lite/source/hw_keystore_sdk/soft_service/hks_storage.c
-index ec51613..db9615d 100755
+index ec51613cd..db9615d15 100755
 --- a/base/security/huks/frameworks/huks_lite/source/hw_keystore_sdk/soft_service/hks_storage.c
 +++ b/base/security/huks/frameworks/huks_lite/source/hw_keystore_sdk/soft_service/hks_storage.c
 @@ -122,28 +122,67 @@ static uint16_t hks_get_key_slot_len(void)
@@ -170,3 +188,16 @@ index ec51613..db9615d 100755
      return sizeof(uint16_t);
  }
  
+diff --git a/base/startup/syspara_lite/frameworks/parameter/src/parameter_common.c b/base/startup/syspara_lite/frameworks/parameter/src/parameter_common.c
+index cecd601c1..67cc86eac 100755
+--- a/base/startup/syspara_lite/frameworks/parameter/src/parameter_common.c
++++ b/base/startup/syspara_lite/frameworks/parameter/src/parameter_common.c
+@@ -23,7 +23,7 @@
+ #define VERSION_ID_LEN 256
+ #define PROPERTY_MAX_LENGTH 2048
+ 
+-static char g_roBuildOs[] = {"OpenHarmony"};
++static char g_roBuildOs[] = {"openHarmony-master"};
+ static char g_roBuildVerShow[] = {"OpenHarmony_release 1.1.0"};
+ static char g_roSdkApiLevel[] = {"3"};
+ static char g_roFirstApiLevel[] = {"1"};

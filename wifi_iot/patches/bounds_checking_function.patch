@@ -1,5 +1,5 @@
 diff --git a/third_party/bounds_checking_function/BUILD.gn b/third_party/bounds_checking_function/BUILD.gn
-index 09f527b..8dc638b 100755
+index 09f527b1c..8dc638bff 100755
 --- a/third_party/bounds_checking_function/BUILD.gn
 +++ b/third_party/bounds_checking_function/BUILD.gn
 @@ -65,10 +65,13 @@ libsec_sources = [
