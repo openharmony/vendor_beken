@@ -1,5 +1,274 @@
+diff --git a/third_party/cJSON/.editorconfig b/third_party/cJSON/.editorconfig
+deleted file mode 100644
+index befb2c20..00000000
+--- a/third_party/cJSON/.editorconfig
++++ /dev/null
+@@ -1,23 +0,0 @@
+-root = true
+-
+-
+-[*]
+-indent_style = space
+-indent_size = 4
+-end_of_line = lf
+-charset = utf-8
+-trim_trailing_whitespace = true
+-insert_final_newline = true
+-
+-[Makefile]
+-indent_style = tab
+-indent_size = unset
+-
+-# ignore external repositories and test inputs
+-[tests/{unity,json-patch-tests,inputs}/*]
+-indent_style = unset
+-indent_size = unset
+-end_of_line = unset
+-charset = unset
+-trim_trailing_whitespace = unset
+-insert_final_newline = unset
+diff --git a/third_party/cJSON/.gitattributes b/third_party/cJSON/.gitattributes
+deleted file mode 100644
+index 7491fcc7..00000000
+--- a/third_party/cJSON/.gitattributes
++++ /dev/null
+@@ -1,8 +0,0 @@
+-*  					text=auto
+-/tests/inputs/*	text eol=lf
+-
+-.gitattributes          export-ignore
+-.gitignore              export-ignore
+-.github                 export-ignore
+-.editorconfig           export-ignore
+-.travis.yml             export-ignore
+diff --git a/third_party/cJSON/.github/CONTRIBUTING.md b/third_party/cJSON/.github/CONTRIBUTING.md
+deleted file mode 100644
+index 83d2e599..00000000
+--- a/third_party/cJSON/.github/CONTRIBUTING.md
++++ /dev/null
+@@ -1,54 +0,0 @@
+-Contribution Guidelines
+-=======================
+-
+-Contributions to cJSON are welcome. If you find a bug or want to improve cJSON in another way, pull requests are appreciated.
+-
+-For bigger changes, in order to avoid wasted effort, please open an issue to discuss the technical details before creating a pull request.
+-
+-The further sections explain the process in more detail and provides some guidelines on how contributions should look like.
+-
+-Branches
+---------
+-There are two branches to be aware of, the `master` and the `develop` branch. The `master` branch is reserved for the latest release, so only make pull requests to the `master` branch for small bug- or security fixes (these are usually just a few lines). In all other cases, please make a pull request to the `develop` branch.
+-
+-Coding Style
+-------------
+-The coding style has been discussed in [#24](https://github.com/DaveGamble/cJSON/issues/24). The basics are:
+-
+-* Use 4 spaces for indentation
+-* No oneliners (conditions, loops, variable declarations ...)
+-* Always use parenthesis for control structures
+-* Don't implicitly rely on operator precedence, use round brackets in expressions. e.g. `(a > b) && (c < d)` instead of `a>b && c<d`
+-* opening curly braces start in the next line
+-* use spaces around operators
+-* lines should not have trailing whitespace
+-* use spaces between function parameters
+-* use pronouncable variable names, not just a combination of letters
+-
+-Example:
+-
+-```c
+-/* calculate the new length of the string in a printbuffer and update the offset */
+-static void update_offset(printbuffer * const buffer)
+-{
+-    const unsigned char *buffer_pointer = NULL;
+-    if ((buffer == NULL) || (buffer->buffer == NULL))
+-    {
+-        return;
+-    }
+-    buffer_pointer = buffer->buffer + buffer->offset;
+-
+-    buffer->offset += strlen((const char*)buffer_pointer);
+-}
+-```
+-
+-Unit Tests
+-----------
+-cJSON uses the [Unity](https://github.com/ThrowTheSwitch/Unity) library for unit tests. The tests are located in the `tests` directory. In order to add a new test, either add it to one of the existing files (if it fits) or add a new C file for the test. That new file has to be added to the list of tests in `tests/CMakeLists.txt`.
+-
+-All new features have to be covered by unit tests.
+-
+-Other Notes
+------------
+-* Internal functions are to be declared static.
+-* Wrap the return type of external function in the `CJSON_PUBLIC` macro.
+diff --git a/third_party/cJSON/.github/workflows/CI.yml b/third_party/cJSON/.github/workflows/CI.yml
+deleted file mode 100644
+index dc9d17c6..00000000
+--- a/third_party/cJSON/.github/workflows/CI.yml
++++ /dev/null
+@@ -1,102 +0,0 @@
+-name: CI
+-
+-on:
+-  push:
+-    branches: [ master ]
+-    paths-ignore:
+-      - '**.md'
+-      - 'LICENSE'
+-  pull_request:
+-    types: [opened, synchronize]
+-    paths-ignore:
+-      - '**.md'
+-      - 'LICENSE'
+-
+-jobs:
+-  linux:
+-    runs-on: ubuntu-latest
+-    if: "!contains(github.event.head_commit.message, 'ci skip')"
+-    strategy:
+-      fail-fast: false
+-      matrix:
+-        mem_check:
+-          - ENABLE_VALGRIND
+-          - ENABLE_SANITIZERS
+-          - NONE_MEM_CHECK
+-        compiler:
+-          - GCC
+-          - CLANG
+-    steps:
+-    - uses: actions/checkout@v2
+-    - name: install build dependencies
+-      run: |
+-        sudo apt-get update
+-        sudo apt-get install clang-8 valgrind
+-    - name: build and test
+-      shell: bash
+-      run: |
+-          if [ "${{ matrix.mem_check }}" == "ENABLE_VALGRIND" ]; then
+-            EVENT_CMAKE_OPTIONS="-DENABLE_CJSON_UTILS=ON -DENABLE_VALGRIND=ON -DENABLE_SAFE_STACK=ON -DENABLE_SANITIZERS=OFF"
+-          elif [ "${{ matrix.mem_check }}" == "ENABLE_SANITIZERS" ]; then
+-            EVENT_CMAKE_OPTIONS="-DENABLE_CJSON_UTILS=ON -DENABLE_VALGRIND=OFF -DENABLE_SAFE_STACK=OFF -DENABLE_SANITIZERS=ON"
+-          else
+-            EVENT_CMAKE_OPTIONS="-DENABLE_CJSON_UTILS=ON -DENABLE_VALGRIND=OFF -DENABLE_SAFE_STACK=OFF -DENABLE_SANITIZERS=OFF"
+-          fi
+-          if [ "${{ matrix.compiler }}" == "GCC" ]; then
+-            export CC=gcc
+-          else
+-            export CC=clang
+-          fi
+-          #run build and test
+-          JOBS=20
+-          export CTEST_PARALLEL_LEVEL=$JOBS
+-          export CTEST_OUTPUT_ON_FAILURE=1
+-          mkdir -p build
+-          cd build
+-          echo [cmake]: cmake .. $EVENT_CMAKE_OPTIONS
+-          cmake .. $EVENT_CMAKE_OPTIONS || (rm -rf * && cmake .. $EVENT_CMAKE_OPTIONS)
+-          cmake --build .
+-          make
+-          make test
+-          
+-  macos:
+-    runs-on: macos-latest
+-    if: "!contains(github.event.head_commit.message, 'ci skip')"
+-    strategy:
+-      fail-fast: false
+-      matrix:
+-        mem_check:
+-          - ENABLE_VALGRIND
+-          - ENABLE_SANITIZERS
+-          - NONE_MEM_CHECK
+-        compiler:
+-          - GCC
+-          - CLANG
+-    steps:
+-    - uses: actions/checkout@v2
+-    - name: build and test
+-      shell: bash
+-      run: |
+-          if [ "${{ matrix.mem_check }}" == "ENABLE_VALGRIND" ]; then
+-            EVENT_CMAKE_OPTIONS="-DENABLE_CJSON_UTILS=ON -DENABLE_VALGRIND=ON -DENABLE_SAFE_STACK=ON -DENABLE_SANITIZERS=OFF"
+-          elif [ "${{ matrix.mem_check }}" == "ENABLE_SANITIZERS" ]; then
+-            EVENT_CMAKE_OPTIONS="-DENABLE_CJSON_UTILS=ON -DENABLE_VALGRIND=OFF -DENABLE_SAFE_STACK=OFF -DENABLE_SANITIZERS=ON"
+-          else
+-            EVENT_CMAKE_OPTIONS="-DENABLE_CJSON_UTILS=ON -DENABLE_VALGRIND=OFF -DENABLE_SAFE_STACK=OFF -DENABLE_SANITIZERS=OFF"
+-          fi
+-          if [ "${{ matrix.compiler }}" == "GCC" ]; then
+-            export CC=gcc
+-          else
+-            export CC=clang
+-          fi
+-          #run build and test
+-          JOBS=20
+-          export CTEST_PARALLEL_LEVEL=$JOBS
+-          export CTEST_OUTPUT_ON_FAILURE=1
+-          mkdir -p build
+-          cd build
+-          echo [cmake]: cmake .. $EVENT_CMAKE_OPTIONS
+-          cmake .. $EVENT_CMAKE_OPTIONS || (rm -rf * && cmake .. $EVENT_CMAKE_OPTIONS)
+-          cmake --build .
+-          make
+-          make test
+diff --git a/third_party/cJSON/.gitignore b/third_party/cJSON/.gitignore
+deleted file mode 100644
+index 58edf92c..00000000
+--- a/third_party/cJSON/.gitignore
++++ /dev/null
+@@ -1,18 +0,0 @@
+-.svn
+-test
+-*.o
+-*.a
+-*.so
+-*.swp
+-*.patch
+-tags
+-*.dylib
+-build/
+-cJSON_test
+-cJSON_test_utils
+-libcjson.so.*
+-libcjson_utils.so.*
+-*.orig
+-.vscode
+-.idea
+-cmake-build-debug
+diff --git a/third_party/cJSON/.travis.yml b/third_party/cJSON/.travis.yml
+deleted file mode 100644
+index e7ff744e..00000000
+--- a/third_party/cJSON/.travis.yml
++++ /dev/null
+@@ -1,28 +0,0 @@
+-dist: trusty
+-sudo: false
+-language: c
+-env:
+-  matrix:
+-    - VALGRIND=On SANITIZERS=Off
+-    - VALGRIND=Off SANITIZERS=Off
+-    - VALGRIND=Off SANITIZERS=On
+-compiler:
+-  - gcc
+-  - clang
+-addons:
+-  apt:
+-    packages:
+-      - valgrind
+-      - libasan0
+-      - lib32asan0
+-      # currently not supported on travis:
+-      # - libasan1
+-      # - libasan2
+-      # - libubsan0
+-      - llvm
+-script:
+-  - mkdir build
+-  - cd build
+-  - cmake .. -DENABLE_CJSON_UTILS=On -DENABLE_VALGRIND="${VALGRIND}" -DENABLE_SAFE_STACK="${VALGRIND}" -DENABLE_SANITIZERS="${SANITIZERS}"
+-  - make
+-  - make test CTEST_OUTPUT_ON_FAILURE=On
 diff --git a/third_party/cJSON/Makefile b/third_party/cJSON/Makefile
-index b14323059..3f0db43b4 100644
+index b1432305..3f0db43b 100644
 --- a/third_party/cJSON/Makefile
 +++ b/third_party/cJSON/Makefile
 @@ -24,14 +24,17 @@ INSTALL_LIBRARY_PATH = $(DESTDIR)$(PREFIX)/$(LIBRARY_PATH)

@@ -1,8 +1,8 @@
 diff --git a/utils/native/lite/hals/file/hal_file.h b/utils/native/lite/hals/file/hal_file.h
-index bfcf3a293..bee85378c 100755
+index bfcf3a29..bc5a94f7 100755
 --- a/utils/native/lite/hals/file/hal_file.h
 +++ b/utils/native/lite/hals/file/hal_file.h
-@@ -36,6 +36,13 @@ int HalFileStat(const char* path, unsigned int* fileSize);
+@@ -36,10 +36,17 @@ int HalFileStat(const char* path, unsigned int* fileSize);
  
  int HalFileSeek(int fd, int offset, unsigned int whence);
  
@@ -16,3 +16,9 @@ index bfcf3a293..bee85378c 100755
  #ifdef __cplusplus
  #if __cplusplus
  }
+ #endif
+ #endif /* __cplusplus */
+ 
+-#endif  // HAL_FILE_SYSTEM_API_H
+\ No newline at end of file
++#endif  // HAL_FILE_SYSTEM_API_H
