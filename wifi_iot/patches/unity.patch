@@ -1,0 +1,15 @@
+diff --git a/third_party/unity/.editorconfig b/third_party/unity/.editorconfig
+old mode 100644
+new mode 100755
+diff --git a/third_party/unity/.gitattributes b/third_party/unity/.gitattributes
+old mode 100644
+new mode 100755
+diff --git a/third_party/unity/.gitignore b/third_party/unity/.gitignore
+old mode 100644
+new mode 100755
+diff --git a/third_party/unity/.travis.yml b/third_party/unity/.travis.yml
+old mode 100644
+new mode 100755
+diff --git a/third_party/unity/test/.rubocop.yml b/third_party/unity/test/.rubocop.yml
+old mode 100644
+new mode 100755

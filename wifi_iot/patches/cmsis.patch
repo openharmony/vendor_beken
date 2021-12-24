@@ -1,6 +1,6 @@
 diff --git a/third_party/cmsis/CMSIS/Core/Include/cachel1_armv7.h b/third_party/cmsis/CMSIS/Core/Include/cachel1_armv7.h
-new file mode 100755
-index 000000000..d2c3e2291
+new file mode 100644
+index 00000000..d2c3e229
 --- /dev/null
 +++ b/third_party/cmsis/CMSIS/Core/Include/cachel1_armv7.h
 @@ -0,0 +1,411 @@
@@ -416,8 +416,8 @@ index 000000000..d2c3e2291
 +
 +#endif /* ARM_CACHEL1_ARMV7_H */
 diff --git a/third_party/cmsis/CMSIS/Core/Include/cmsis_armcc.h b/third_party/cmsis/CMSIS/Core/Include/cmsis_armcc.h
-new file mode 100755
-index 000000000..237ff6ec3
+new file mode 100644
+index 00000000..237ff6ec
 --- /dev/null
 +++ b/third_party/cmsis/CMSIS/Core/Include/cmsis_armcc.h
 @@ -0,0 +1,885 @@
@@ -1307,8 +1307,8 @@ index 000000000..237ff6ec3
 +
 +#endif /* __CMSIS_ARMCC_H */
 diff --git a/third_party/cmsis/CMSIS/Core/Include/cmsis_armclang.h b/third_party/cmsis/CMSIS/Core/Include/cmsis_armclang.h
-new file mode 100755
-index 000000000..90de9dbf8
+new file mode 100644
+index 00000000..90de9dbf
 --- /dev/null
 +++ b/third_party/cmsis/CMSIS/Core/Include/cmsis_armclang.h
 @@ -0,0 +1,1467 @@
@@ -2780,8 +2780,8 @@ index 000000000..90de9dbf8
 +
 +#endif /* __CMSIS_ARMCLANG_H */
 diff --git a/third_party/cmsis/CMSIS/Core/Include/cmsis_armclang_ltm.h b/third_party/cmsis/CMSIS/Core/Include/cmsis_armclang_ltm.h
-new file mode 100755
-index 000000000..0e5c7349d
+new file mode 100644
+index 00000000..0e5c7349
 --- /dev/null
 +++ b/third_party/cmsis/CMSIS/Core/Include/cmsis_armclang_ltm.h
 @@ -0,0 +1,1893 @@
@@ -4679,8 +4679,8 @@ index 000000000..0e5c7349d
 +
 +#endif /* __CMSIS_ARMCLANG_H */
 diff --git a/third_party/cmsis/CMSIS/Core/Include/cmsis_compiler.h b/third_party/cmsis/CMSIS/Core/Include/cmsis_compiler.h
-new file mode 100755
-index 000000000..adbf296f1
+new file mode 100644
+index 00000000..adbf296f
 --- /dev/null
 +++ b/third_party/cmsis/CMSIS/Core/Include/cmsis_compiler.h
 @@ -0,0 +1,283 @@
@@ -4968,8 +4968,8 @@ index 000000000..adbf296f1
 +#endif /* __CMSIS_COMPILER_H */
 +
 diff --git a/third_party/cmsis/CMSIS/Core/Include/cmsis_gcc.h b/third_party/cmsis/CMSIS/Core/Include/cmsis_gcc.h
-new file mode 100755
-index 000000000..a2778f58e
+new file mode 100644
+index 00000000..a2778f58
 --- /dev/null
 +++ b/third_party/cmsis/CMSIS/Core/Include/cmsis_gcc.h
 @@ -0,0 +1,2177 @@
@@ -7151,8 +7151,8 @@ index 000000000..a2778f58e
 +
 +#endif /* __CMSIS_GCC_H */
 diff --git a/third_party/cmsis/CMSIS/Core/Include/cmsis_iccarm.h b/third_party/cmsis/CMSIS/Core/Include/cmsis_iccarm.h
-new file mode 100755
-index 000000000..7eeffca5c
+new file mode 100644
+index 00000000..7eeffca5
 --- /dev/null
 +++ b/third_party/cmsis/CMSIS/Core/Include/cmsis_iccarm.h
 @@ -0,0 +1,968 @@
@@ -8125,8 +8125,8 @@ index 000000000..7eeffca5c
 +
 +#endif /* __CMSIS_ICCARM_H__ */
 diff --git a/third_party/cmsis/CMSIS/Core/Include/cmsis_version.h b/third_party/cmsis/CMSIS/Core/Include/cmsis_version.h
-new file mode 100755
-index 000000000..2f048e455
+new file mode 100644
+index 00000000..2f048e45
 --- /dev/null
 +++ b/third_party/cmsis/CMSIS/Core/Include/cmsis_version.h
 @@ -0,0 +1,39 @@
@@ -8170,8 +8170,8 @@ index 000000000..2f048e455
 +                                   __CM_CMSIS_VERSION_SUB           )       /*!< CMSIS Core(M) version number */
 +#endif
 diff --git a/third_party/cmsis/CMSIS/Core/Include/core_armv81mml.h b/third_party/cmsis/CMSIS/Core/Include/core_armv81mml.h
-new file mode 100755
-index 000000000..1ad19e215
+new file mode 100644
+index 00000000..1ad19e21
 --- /dev/null
 +++ b/third_party/cmsis/CMSIS/Core/Include/core_armv81mml.h
 @@ -0,0 +1,4191 @@
@@ -12367,8 +12367,8 @@ index 000000000..1ad19e215
 +
 +#endif /* __CMSIS_GENERIC */
 diff --git a/third_party/cmsis/CMSIS/Core/Include/core_armv8mbl.h b/third_party/cmsis/CMSIS/Core/Include/core_armv8mbl.h
-new file mode 100755
-index 000000000..932d3d188
+new file mode 100644
+index 00000000..932d3d18
 --- /dev/null
 +++ b/third_party/cmsis/CMSIS/Core/Include/core_armv8mbl.h
 @@ -0,0 +1,2222 @@
@@ -14595,8 +14595,8 @@ index 000000000..932d3d188
 +
 +#endif /* __CMSIS_GENERIC */
 diff --git a/third_party/cmsis/CMSIS/Core/Include/core_armv8mml.h b/third_party/cmsis/CMSIS/Core/Include/core_armv8mml.h
-new file mode 100755
-index 000000000..71f000bca
+new file mode 100644
+index 00000000..71f000bc
 --- /dev/null
 +++ b/third_party/cmsis/CMSIS/Core/Include/core_armv8mml.h
 @@ -0,0 +1,3196 @@
@@ -17797,8 +17797,8 @@ index 000000000..71f000bca
 +
 +#endif /* __CMSIS_GENERIC */
 diff --git a/third_party/cmsis/CMSIS/Core/Include/core_cm0.h b/third_party/cmsis/CMSIS/Core/Include/core_cm0.h
-new file mode 100755
-index 000000000..6441ff341
+new file mode 100644
+index 00000000..6441ff34
 --- /dev/null
 +++ b/third_party/cmsis/CMSIS/Core/Include/core_cm0.h
 @@ -0,0 +1,952 @@
@@ -18755,8 +18755,8 @@ index 000000000..6441ff341
 +
 +#endif /* __CMSIS_GENERIC */
 diff --git a/third_party/cmsis/CMSIS/Core/Include/core_cm0plus.h b/third_party/cmsis/CMSIS/Core/Include/core_cm0plus.h
-new file mode 100755
-index 000000000..4e7179a61
+new file mode 100644
+index 00000000..4e7179a6
 --- /dev/null
 +++ b/third_party/cmsis/CMSIS/Core/Include/core_cm0plus.h
 @@ -0,0 +1,1087 @@
@@ -19848,8 +19848,8 @@ index 000000000..4e7179a61
 +
 +#endif /* __CMSIS_GENERIC */
 diff --git a/third_party/cmsis/CMSIS/Core/Include/core_cm1.h b/third_party/cmsis/CMSIS/Core/Include/core_cm1.h
-new file mode 100755
-index 000000000..76b456974
+new file mode 100644
+index 00000000..76b45697
 --- /dev/null
 +++ b/third_party/cmsis/CMSIS/Core/Include/core_cm1.h
 @@ -0,0 +1,979 @@
@@ -20833,8 +20833,8 @@ index 000000000..76b456974
 +
 +#endif /* __CMSIS_GENERIC */
 diff --git a/third_party/cmsis/CMSIS/Core/Include/core_cm23.h b/third_party/cmsis/CMSIS/Core/Include/core_cm23.h
-new file mode 100755
-index 000000000..55fff9950
+new file mode 100644
+index 00000000..55fff995
 --- /dev/null
 +++ b/third_party/cmsis/CMSIS/Core/Include/core_cm23.h
 @@ -0,0 +1,2297 @@
@@ -23136,8 +23136,8 @@ index 000000000..55fff9950
 +
 +#endif /* __CMSIS_GENERIC */
 diff --git a/third_party/cmsis/CMSIS/Core/Include/core_cm3.h b/third_party/cmsis/CMSIS/Core/Include/core_cm3.h
-new file mode 100755
-index 000000000..24453a886
+new file mode 100644
+index 00000000..24453a88
 --- /dev/null
 +++ b/third_party/cmsis/CMSIS/Core/Include/core_cm3.h
 @@ -0,0 +1,1943 @@
@@ -25085,8 +25085,8 @@ index 000000000..24453a886
 +
 +#endif /* __CMSIS_GENERIC */
 diff --git a/third_party/cmsis/CMSIS/Core/Include/core_cm33.h b/third_party/cmsis/CMSIS/Core/Include/core_cm33.h
-new file mode 100755
-index 000000000..13359be3e
+new file mode 100644
+index 00000000..13359be3
 --- /dev/null
 +++ b/third_party/cmsis/CMSIS/Core/Include/core_cm33.h
 @@ -0,0 +1,3264 @@
@@ -28355,8 +28355,8 @@ index 000000000..13359be3e
 +
 +#endif /* __CMSIS_GENERIC */
 diff --git a/third_party/cmsis/CMSIS/Core/Include/core_cm35p.h b/third_party/cmsis/CMSIS/Core/Include/core_cm35p.h
-new file mode 100755
-index 000000000..6a5f6ad14
+new file mode 100644
+index 00000000..6a5f6ad1
 --- /dev/null
 +++ b/third_party/cmsis/CMSIS/Core/Include/core_cm35p.h
 @@ -0,0 +1,3264 @@
@@ -31625,8 +31625,8 @@ index 000000000..6a5f6ad14
 +
 +#endif /* __CMSIS_GENERIC */
 diff --git a/third_party/cmsis/CMSIS/Core/Include/core_cm4.h b/third_party/cmsis/CMSIS/Core/Include/core_cm4.h
-new file mode 100755
-index 000000000..4e0e88669
+new file mode 100644
+index 00000000..4e0e8866
 --- /dev/null
 +++ b/third_party/cmsis/CMSIS/Core/Include/core_cm4.h
 @@ -0,0 +1,2129 @@
@@ -33760,8 +33760,8 @@ index 000000000..4e0e88669
 +
 +#endif /* __CMSIS_GENERIC */
 diff --git a/third_party/cmsis/CMSIS/Core/Include/core_cm55.h b/third_party/cmsis/CMSIS/Core/Include/core_cm55.h
-new file mode 100755
-index 000000000..6efaa3f84
+new file mode 100644
+index 00000000..6efaa3f8
 --- /dev/null
 +++ b/third_party/cmsis/CMSIS/Core/Include/core_cm55.h
 @@ -0,0 +1,4215 @@
@@ -37981,8 +37981,8 @@ index 000000000..6efaa3f84
 +
 +#endif /* __CMSIS_GENERIC */
 diff --git a/third_party/cmsis/CMSIS/Core/Include/core_cm7.h b/third_party/cmsis/CMSIS/Core/Include/core_cm7.h
-new file mode 100755
-index 000000000..e1c31c275
+new file mode 100644
+index 00000000..e1c31c27
 --- /dev/null
 +++ b/third_party/cmsis/CMSIS/Core/Include/core_cm7.h
 @@ -0,0 +1,2362 @@
@@ -40349,8 +40349,8 @@ index 000000000..e1c31c275
 +
 +#endif /* __CMSIS_GENERIC */
 diff --git a/third_party/cmsis/CMSIS/Core/Include/core_sc000.h b/third_party/cmsis/CMSIS/Core/Include/core_sc000.h
-new file mode 100755
-index 000000000..dbc755fff
+new file mode 100644
+index 00000000..dbc755ff
 --- /dev/null
 +++ b/third_party/cmsis/CMSIS/Core/Include/core_sc000.h
 @@ -0,0 +1,1030 @@
@@ -41385,8 +41385,8 @@ index 000000000..dbc755fff
 +
 +#endif /* __CMSIS_GENERIC */
 diff --git a/third_party/cmsis/CMSIS/Core/Include/core_sc300.h b/third_party/cmsis/CMSIS/Core/Include/core_sc300.h
-new file mode 100755
-index 000000000..e8914ba60
+new file mode 100644
+index 00000000..e8914ba6
 --- /dev/null
 +++ b/third_party/cmsis/CMSIS/Core/Include/core_sc300.h
 @@ -0,0 +1,1917 @@
@@ -43308,8 +43308,8 @@ index 000000000..e8914ba60
 +
 +#endif /* __CMSIS_GENERIC */
 diff --git a/third_party/cmsis/CMSIS/Core/Include/mpu_armv7.h b/third_party/cmsis/CMSIS/Core/Include/mpu_armv7.h
-new file mode 100755
-index 000000000..791a8dae6
+new file mode 100644
+index 00000000..791a8dae
 --- /dev/null
 +++ b/third_party/cmsis/CMSIS/Core/Include/mpu_armv7.h
 @@ -0,0 +1,275 @@
@@ -43589,8 +43589,8 @@ index 000000000..791a8dae6
 +
 +#endif
 diff --git a/third_party/cmsis/CMSIS/Core/Include/mpu_armv8.h b/third_party/cmsis/CMSIS/Core/Include/mpu_armv8.h
-new file mode 100755
-index 000000000..ef44ad01d
+new file mode 100644
+index 00000000..ef44ad01
 --- /dev/null
 +++ b/third_party/cmsis/CMSIS/Core/Include/mpu_armv8.h
 @@ -0,0 +1,352 @@
@@ -43947,8 +43947,8 @@ index 000000000..ef44ad01d
 +#endif
 +
 diff --git a/third_party/cmsis/CMSIS/Core/Include/pmu_armv8.h b/third_party/cmsis/CMSIS/Core/Include/pmu_armv8.h
-new file mode 100755
-index 000000000..dbd39d20c
+new file mode 100644
+index 00000000..dbd39d20
 --- /dev/null
 +++ b/third_party/cmsis/CMSIS/Core/Include/pmu_armv8.h
 @@ -0,0 +1,337 @@
@@ -44290,8 +44290,8 @@ index 000000000..dbd39d20c
 +
 +#endif
 diff --git a/third_party/cmsis/CMSIS/Core/Include/tz_context.h b/third_party/cmsis/CMSIS/Core/Include/tz_context.h
-new file mode 100755
-index 000000000..0d09749f3
+new file mode 100644
+index 00000000..0d09749f
 --- /dev/null
 +++ b/third_party/cmsis/CMSIS/Core/Include/tz_context.h
 @@ -0,0 +1,70 @@
@@ -44366,8 +44366,8 @@ index 000000000..0d09749f3
 + 
 +#endif  // TZ_CONTEXT_H
 diff --git a/third_party/cmsis/CMSIS/RTOS2/Include/cmsis_os2.h b/third_party/cmsis/CMSIS/RTOS2/Include/cmsis_os2.h
-new file mode 100755
-index 000000000..e0b602c79
+new file mode 100644
+index 00000000..e0b602c7
 --- /dev/null
 +++ b/third_party/cmsis/CMSIS/RTOS2/Include/cmsis_os2.h
 @@ -0,0 +1,756 @@
@@ -45128,8 +45128,8 @@ index 000000000..e0b602c79
 + 
 +#endif  // CMSIS_OS2_H_
 diff --git a/third_party/cmsis/CMSIS/RTOS2/Include/os_tick.h b/third_party/cmsis/CMSIS/RTOS2/Include/os_tick.h
-new file mode 100755
-index 000000000..8f7cdf667
+new file mode 100644
+index 00000000..8f7cdf66
 --- /dev/null
 +++ b/third_party/cmsis/CMSIS/RTOS2/Include/os_tick.h
 @@ -0,0 +1,71 @@
@@ -45204,9 +45204,15 @@ index 000000000..8f7cdf667
 +uint32_t OS_Tick_GetOverflow (void);
 +
 +#endif  /* OS_TICK_H */
+diff --git a/third_party/cmsis/LICENSE.txt b/third_party/cmsis/LICENSE.txt
+old mode 100755
+new mode 100644
+diff --git a/third_party/cmsis/README.OpenSource b/third_party/cmsis/README.OpenSource
+old mode 100755
+new mode 100644
 diff --git a/third_party/cmsis/cmsis_os2.h b/third_party/cmsis/cmsis_os2.h
 deleted file mode 100755
-index d4e1436b3..000000000
+index d4e1436b..00000000
 --- a/third_party/cmsis/cmsis_os2.h
 +++ /dev/null
 @@ -1,1215 +0,0 @@

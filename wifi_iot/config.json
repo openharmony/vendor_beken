@@ -56,7 +56,7 @@
         ]
       }
     ],
-    "vendor_adapter_dir": "//device/bk_corp/bk7231/bk7231_adapter",
+    "vendor_adapter_dir": "//device/bk_corp/bk7231",
     "third_party_dir": "//device/bk_corp/bk7231/bk7231_sdk/third_party",
     "product_adapter_dir": "//vendor/beken/wifi_iot/hals",
     "ohos_product_type":"",

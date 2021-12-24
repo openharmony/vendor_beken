@@ -1,6 +1,6 @@
 diff --git a/build/lite/components/beken.json b/build/lite/components/beken.json
 new file mode 100755
-index 000000000..f3beb3892
+index 00000000..ed16902e
 --- /dev/null
 +++ b/build/lite/components/beken.json
 @@ -0,0 +1,46 @@
@@ -11,10 +11,10 @@ index 000000000..f3beb3892
 +      "description": "my ohos entry.",
 +      "optional": "true",
 +      "dirs": [
-+        "//device/bk_corp/bk7231/bk7231_sdk/ohos"
++        "//device/bk_corp/bk7231/bk7231_sdk/ohos_entry"
 +      ],
 +      "targets": [
-+        "//device/bk_corp/bk7231/bk7231_sdk/ohos:ohos_entry"
++        "//device/bk_corp/bk7231/bk7231_sdk/ohos_entry:ohos_entry"
 +      ],
 +      "rom": "",
 +      "ram": "",
@@ -51,7 +51,7 @@ index 000000000..f3beb3892
 +  ]
 +}
 diff --git a/build/lite/components/security.json b/build/lite/components/security.json
-index af049a1cf..3bc6c2644 100755
+index af049a1c..3bc6c264 100755
 --- a/build/lite/components/security.json
 +++ b/build/lite/components/security.json
 @@ -68,6 +68,7 @@
