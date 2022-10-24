@@ -1,0 +1,8 @@
+group("test_xts_part1") {
+  deps = [
+
+    "//test/xts/tools/lite/hctest:hctest",
+  
+  ]
+}
+

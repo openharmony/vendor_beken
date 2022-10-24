@@ -1,0 +1,115 @@
+{
+    "product_name": "xts_test_part2",
+    "ohos_version": "OpenHarmony 3.0",
+    "type": "mini",
+    "version": "3.0",
+    "device_company": "beken",
+    "board": "bk7235x",
+    "kernel_type": "liteos_m",
+    "kernel_version": "3.0",
+    "subsystems": [
+      {
+        "subsystem": "kernel",
+        "components": [
+          {
+            "component": "liteos_m",
+            "features": [
+            "ohos_kernel_liteos_m_lwip_path = \"//device/soc/beken/bk7235/liteos_m/bk_sdk_armino/components/lwip_intf_v2_1/lwip-2.1.2\""
+            ]
+		  }
+		]
+      },
+      {
+        "subsystem": "hiviewdfx",
+        "components": [
+          { "component": "hilog_lite", "features":[] },
+          { "component": "hievent_lite", "features":[] }
+        ]
+      },
+      {
+        "subsystem": "systemabilitymgr",
+        "components": [
+          { "component": "samgr_lite", "features":[] }
+        ]
+      },
+      {
+        "subsystem": "communication",
+        "components": [
+          { "component": "wifi_lite", "features":[] }
+         ]
+       },
+      {
+        "subsystem": "commonlibrary",
+        "components": [
+          { "component": "file", "features":[] },
+          { "component": "timer_task", "features":[] },
+          { "component": "kal_timer", "features":[] }
+        ]
+      },
+      {
+        "subsystem": "startup",
+        "components": [
+          { "component": "bootstrap_lite", "features":[] },
+          { "component": "init_lite", "features":["enable_ohos_startup_init_feature_begetctl_liteos = true"] },
+          { "component": "syspara_lite", "features":[] }
+        ]
+      },
+      {
+        "subsystem": "security",
+        "components": [
+          { "component": "huks", "features":
+            [
+              "disable_huks_binary = true",
+              "disable_authenticate = true",
+              "huks_use_lite_storage = true",
+              "huks_use_hardware_root_key = true",
+              "huks_config_file = \"hks_config_lite.h\"",
+              "ohos_security_huks_mbedtls_porting_path = \"//device/soc/beken/bk7235/liteos_m/components/mbedtls\""
+                
+            ]
+          }
+        ]
+      },
+      {
+        "subsystem": "iothardware",
+        "components": [
+          { "component": "peripheral", "features":[] }
+        ]
+      },
+      {
+        "subsystem": "xts",
+        "components": [
+          {"component": "xts_acts", "features":
+            [
+              "enable_ohos_test_xts_acts_use_thirdparty_lwip = true",
+              "build_xts = true"
+            ]
+          },
+          { "component": "xts_tools", "features":[] }
+        ]
+      }
+    ],
+
+    "third_party_dir": "//third_party",
+    "product_adapter_dir": "//vendor/beken/test_xts_part2/hals",
+    "xts_list": [
+      {
+        "enable": "true",
+        "xts_modules": [
+          "ActsKvStoreTest",
+          "ActsDfxFuncTest",
+          "ActsHieventLiteTest",
+          "ActsSamgrTest",
+          "ActsParameterTest",
+          "ActsWifiServiceTest",
+          "ActsWifiIotTest",
+          "ActsBootstrapTest"
+        ]
+      }
+    ],
+    "tests_list": [
+      {
+        "enable": "false"
+      }
+    ]
+}

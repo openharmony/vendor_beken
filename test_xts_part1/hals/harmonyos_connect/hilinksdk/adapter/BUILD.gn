@@ -1,0 +1,17 @@
+
+import("//build/lite/config/component/lite_component.gni")
+import("//applications/iot_solution/device.gni")
+
+static_library("ota_update_adapter") {
+  sources = [
+    "src/hilink_open_ota_adapter.c",
+    "src/hilink_open_ota_mcu_adapter.c",
+  ]
+  
+  include_dirs = [ 
+    "include",
+   # "//device/asr/asr582x/drivers/ota"
+  ]
+  
+  deps = [ "$ohos_vendor_adapter_dir/hals/update:hal_update_static" ]
+}
