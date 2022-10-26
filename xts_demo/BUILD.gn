@@ -11,23 +11,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import("${board_adapter_dir}/hals/sdk_dir.gni")
+group("xts_demo") {
+  deps = [
 
-static_library("hal_token_static") {
-  sources = [ "hal_token.c" ]
-
-  include_dirs = [
-    "//base/startup/syspara_lite/hals",
-    "//utils/native/lite/include",
-    "${beken_sdk_dir}/include",
-    "${beken_sdk_dir}/include/arch/compiler",
-    "${beken_sdk_dir}/components/bk_cli/include",
-    "${beken_sdk_dir}/components/bk_cli/include/bk_private",
-    "//utils/native/lite/hals/file",
-    "//applications/iot_solution/thing_model/WiFi",
-
+    "//test/xts/tools/lite/hctest:hctest",
+  
   ]
-  include_dirs += bk_hal_include_dirs
-
-  deps = []
 }
+
