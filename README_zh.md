@@ -14,8 +14,7 @@
 
 ```
 /vendor/beken/						--- vendor_beken 仓库路径
-├── test_xts_part1					--- xts_part1测试
-├── test_xts_part2					--- xts_part2测试
+├── xts_demo						--- xts_demo测试
 └── wifi_bk7235						--- wifi_bk7235样例
 ```
 

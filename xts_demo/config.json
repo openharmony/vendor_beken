@@ -1,5 +1,5 @@
 {
-    "product_name": "xts_test_part2",
+    "product_name": "xts_test_part1",
     "ohos_version": "OpenHarmony 3.0",
     "type": "mini",
     "version": "3.0",
@@ -50,7 +50,7 @@
         "subsystem": "startup",
         "components": [
           { "component": "bootstrap_lite", "features":[] },
-          { "component": "init_lite", "features":["enable_ohos_startup_init_feature_begetctl_liteos = true"] },
+          { "component": "init_lite", "features":["enable_ohos_startup_init_feature_begetctl_liteos = false"] },
           { "component": "syspara_lite", "features":[] }
         ]
       },
@@ -91,7 +91,7 @@
     ],
 
     "third_party_dir": "//third_party",
-    "product_adapter_dir": "//vendor/beken/test_xts_part2/hals",
+    "product_adapter_dir": "//vendor/beken/xts_demo/hals",
     "xts_list": [
       {
         "enable": "true",
