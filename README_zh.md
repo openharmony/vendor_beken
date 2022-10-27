@@ -1,7 +1,7 @@
 # vendor_beken
 
 -	[介绍](#介绍)
--	[软件架构](#软件架构)
+-	[目录框架](#目录框架)
 -	[安装教程](#安装教程)
 -	[贡献](#贡献)
 -	[相关仓](#相关仓)
@@ -10,7 +10,7 @@
 
 该仓库托管beken开发的基于bk7235芯片的示例代码,包括xts测试和wifi_bk7235的配置文件和hal模块
 
-## 软件架构
+## 目录框架
 
 ```
 /vendor/beken/						--- vendor_beken 仓库路径
@@ -20,7 +20,7 @@
 
 ## 安装教程
 
-参考[环境搭建](https://gitee.com/openharmony-sig/device_soc_beken#编译环境搭建)
+参考[bk7235安装教程](https://gitee.com/openharmony-sig/device_soc_beken/blob/master/README_zh.md#编译环境搭建)
 
 ## 贡献
 
@@ -30,6 +30,6 @@
 
 ## 相关仓
 
-[soc](https://gitee.com/openharmony-sig/device_soc_beken)
+[device_soc_beken](https://gitee.com/openharmony-sig/device_soc_beken)
 
-[device_board](https://gitee.com/openharmony-sig/device_board_beken)
+[device_board_beken](https://gitee.com/openharmony-sig/device_board_beken)
