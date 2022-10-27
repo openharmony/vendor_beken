@@ -33,6 +33,8 @@
                 <policyitem type="license" name="Apache" path=".*" desc="beken use apache 2.0 license"/>
                 <policyitem type="license" name="BSD-3-Clause" path=".*" desc="beken use BSD-3-Clause license"/>
                 <policyitem type="license" name="MIT" path=".*" desc="beken use MIT license"/>
+				
+				<policyitem type="copyright" name="Copyright (C) 2022 BEKEN" path=".*" desc="use beken copyright"/>
             </policy>
         </policylist>
         <filefilterlist>
