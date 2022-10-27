@@ -20,7 +20,7 @@
 
 ## 安装教程
 
-参考[环境搭建](https://gitee.com/openharmony/device_soc_beken#环境搭建)
+参考[环境搭建](https://gitee.com/openharmony-sig/device_soc_beken#编译环境搭建)
 
 ## 贡献
 
@@ -30,5 +30,6 @@
 
 ## 相关仓
 
- [device/soc/beken](https://gitee.com/openharmony/device_soc_beken)
- [device/board/beken](https://gitee.com/openharmony/device_board_beken)
+[soc](https://gitee.com/openharmony-sig/device_soc_beken)
+
+[device_board](https://gitee.com/openharmony-sig/device_board_beken)
