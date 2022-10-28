@@ -22,59 +22,21 @@
         <licensefile></licensefile>
         <policylist>
             <policy name="projectPolicy" desc="">
-                <policyitem type="copyright" name="Copyright (c) 2022 ASR Microelectronics (Shanghai) Co., Ltd. All rights reserved." path=".*" desc="original beken copyright"/>
-                <policyitem type="copyright" name="Copyright (c) 2013-2018 Arm Limited. All rights reserved." path=".*" desc="original beken copyright"/>
-                <policyitem type="copyright" name="Copyright (C) 2015-2017 Alibaba Group Holding Limited." path=".*" desc="beken use Alibaba copyright"/>
-                <policyitem type="copyright" name="Copyright (c) 2020 Huawei Device Co., Ltd." path=".*" desc="beken use Huawei copyright"/>
-                <policyitem type="copyright" name="Copyright (c) 2021 Huawei Device Co., Ltd." path=".*" desc="beken use Huawei copyright"/>
-                <policyitem type="copyright" name="Copyright (c) 2020-2021 Huawei Device Co., Ltd. All rights reserved." path=".*" desc="beken use Huawei copyright"/>
-                <policyitem type="copyright" name="Copyright (c) 2013-2019 Huawei Technologies Co., Ltd. All rights reserved." path=".*" desc="beken use Huawei copyright"/>
-                <policyitem type="copyright" name="Copyright (c) 2009-2020 Arm Limited., Ltd. All rights reserved." path=".*" desc="beken use Huawei copyright"/>
+                <policyitem type="copyright" name="Huawei" path=".*" desc="beken use Huawei copyright"/>
+                <policyitem type="copyright" name="BEKEN" path=".*" desc="use beken copyright"/>
+                <policyitem type="copyright" name="Beken" path=".*" desc="use beken copyright"/>		
                 <policyitem type="license" name="Apache" path=".*" desc="beken use apache 2.0 license"/>
                 <policyitem type="license" name="BSD-3-Clause" path=".*" desc="beken use BSD-3-Clause license"/>
                 <policyitem type="license" name="MIT" path=".*" desc="beken use MIT license"/>
-				
-				<policyitem type="copyright" name="Copyright (C) 2022 BEKEN" path=".*" desc="use beken copyright"/>
             </policy>
         </policylist>
         <filefilterlist>
             <filefilter name="defaultFilter" desc="beken using MIT files, but invalid copyright">
                 <filteritem type="filepath" name="EULA" desc="beken using MIT files, but invalid copyright"/>
             </filefilter>
-			<filefilter name="defaultFilter" desc="beken using license files, but invalid copyright">
-                <filteritem type="filepath" name="test_xts_part1/hals/harmonyos_connect/kitframework/adapter/include/oem_auth_config.h" desc="beken using license files, but invalid copyright"/>
-				<filteritem type="filepath" name="wifi_bk7235/hals/harmonyos_connect/kitframework/adapter/include/oem_auth_config.h" desc="beken using MIT files, but invalid copyright"/>
-				<filteritem type="filepath" name="test_xts_part1/hals/harmonyos_connect/kitframework/adapter/include/oem_auth_result_storage.h" desc="beken using MIT files, but invalid copyright"/>
-				<filteritem type="filepath" name="wifi_bk7235/hals/harmonyos_connect/kitframework/adapter/include/oem_auth_result_storage.h" desc="beken using MIT files, but invalid copyright"/>
-				<filteritem type="filepath" name="test_xts_part1/BUILD.gn" desc="beken using MIT files, but invalid copyright"/>
-				<filteritem type="filepath" name="test_xts_part1/hals/harmonyos_connect/kitframework/adapter/src/oem_auth_config.c" desc="beken using MIT files, but invalid copyright"/>
-				<filteritem type="filepath" name="wifi_bk7235/BUILD.gn" desc="beken using MIT files, but invalid copyright"/>
-				<filteritem type="filepath" name="wifi_bk7235/hals/harmonyos_connect/kitframework/adapter/src/oem_auth_config.c" desc="beken using MIT files, but invalid copyright"/>
-				<filteritem type="filepath" name="test_xts_part1/hals/harmonyos_connect/harmonyos_connect.gni" desc="beken using MIT files, but invalid copyright"/>
-				<filteritem type="filepath" name="test_xts_part1/hals/harmonyos_connect/kitframework/adapter/src/oem_auth_result_storage.c" desc="beken using MIT files, but invalid copyright"/>
-				<filteritem type="filepath" name="wifi_bk7235/hals/harmonyos_connect/harmonyos_connect.gni" desc="beken using MIT files, but invalid copyright"/>
-				<filteritem type="filepath" name="wifi_bk7235/hals/harmonyos_connect/kitframework/adapter/src/oem_auth_result_storage.c" desc="beken using MIT files, but invalid copyright"/>
-				<filteritem type="filepath" name="test_xts_part1/hals/harmonyos_connect/hilinksdk/adapter/BUILD.gn" desc="beken using MIT files, but invalid copyright"/>
-				<filteritem type="filepath" name="wifi_bk7235/hals/harmonyos_connect/hilinksdk/adapter/BUILD.gn" desc="beken using MIT files, but invalid copyright"/>
-				<filteritem type="filepath" name="test_xts_part1/hals/harmonyos_connect/hilinksdk/adapter/include/hilink_open_ota_adapter.h" desc="beken using MIT files, but invalid copyright"/>
-				<filteritem type="filepath" name="wifi_bk7235/hals/harmonyos_connect/hilinksdk/adapter/include/hilink_open_ota_adapter.h" desc="beken using MIT files, but invalid copyright"/>
-				<filteritem type="filepath" name="test_xts_part1/hals/harmonyos_connect/hilinksdk/adapter/include/hilink_open_ota_mcu_adapter.h" desc="beken using MIT files, but invalid copyright"/>
-				<filteritem type="filepath" name="wifi_bk7235/hals/harmonyos_connect/hilinksdk/adapter/include/hilink_open_ota_mcu_adapter.h" desc="beken using MIT files, but invalid copyright"/>
-				<filteritem type="filepath" name="test_xts_part1/hals/harmonyos_connect/hilinksdk/adapter/src/hilink_open_ota_adapter.c" desc="beken using MIT files, but invalid copyright"/>
-				<filteritem type="filepath" name="test_xts_part1/hals/utils/sys_param/BUILD.gn" desc="beken using MIT files, but invalid copyright"/>
-				<filteritem type="filepath" name="wifi_bk7235/hals/harmonyos_connect/hilinksdk/adapter/src/hilink_open_ota_adapter.c" desc="beken using MIT files, but invalid copyright"/>
-				<filteritem type="filepath" name="wifi_bk7235/hals/utils/sys_param/BUILD.gn" desc="beken using MIT files, but invalid copyright"/>
-				<filteritem type="filepath" name="test_xts_part1/hals/harmonyos_connect/hilinksdk/adapter/src/hilink_open_ota_mcu_adapter.c" desc="beken using MIT files, but invalid copyright"/>
-				<filteritem type="filepath" name="test_xts_part1/hals/utils/sys_param/hal_sys_param.c" desc="beken using MIT files, but invalid copyright"/>
-				<filteritem type="filepath" name="wifi_bk7235/hals/harmonyos_connect/hilinksdk/adapter/src/hilink_open_ota_mcu_adapter.c" desc="beken using MIT files, but invalid copyright"/>
-				<filteritem type="filepath" name="wifi_bk7235/hals/utils/sys_param/hal_sys_param.c" desc="beken using MIT files, but invalid copyright"/>
-				<filteritem type="filepath" name="test_xts_part1/hals/utils/token/hal_token.c" desc="beken using MIT files, but invalid copyright"/>
-				<filteritem type="filepath" name="wifi_bk7235/hals/utils/token/hal_token.c" desc="beken using MIT files, but invalid copyright"/>
-				<filteritem type="filepath" name="test_xts_part1/hals/harmonyos_connect/kitframework/adapter/BUILD.gn" desc="beken using MIT files, but invalid copyright"/>
-				<filteritem type="filepath" name="wifi_bk7235/hals/harmonyos_connect/kitframework/adapter/BUILD.gn" desc="beken using MIT files, but invalid copyright"/>
-				<filteritem type="filepath" name="test_xts_part1/hals/harmonyos_connect/kitframework/adapter/include/kitframework_client.h" desc="beken using MIT files, but invalid copyright"/>
-				<filteritem type="filepath" name="wifi_bk7235/hals/harmonyos_connect/kitframework/adapter/include/kitframework_client.h" desc="beken using MIT files, but invalid copyright"/>
-				<filteritem type="filepath" name="EULA" desc="beken using MIT files, but invalid copyright"/>
+			
+			<filefilter name="binaryFileTypePolicyFilter" desc="Filters for binary file policies" >
+                <filteritem type="filename" name="*.a|*.so|*.bin|*.exe|*.7z|*.elf|*.png|*.sh|image_gen_header" desc="Temp files"/>
             </filefilter>
         </filefilterlist>
     </oatconfig>
