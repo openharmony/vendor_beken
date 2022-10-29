@@ -1,19 +1,13 @@
 # vendor_beken
 
--	[介绍](#介绍)
--	[目录框架](#目录框架)
--	[安装教程](#安装教程)
--	[贡献](#贡献)
--	[相关仓](#相关仓)
-
 ## 介绍
 
-该仓库托管beken开发的基于bk7235芯片的示例代码,包括xts测试和wifi_bk7235的配置文件和hal模块
+该仓库托管BEKEN开发的，基于BK7235芯片的示例代码。包括XTS测试和WiFi_BK7235的配置文件和HAL模块
 
 ## 目录框架
 
 ```
-/vendor/beken/						--- vendor_beken 仓库路径
+vendor_beken/						--- vendor_beken 仓库路径
 ├── xts_demo						--- xts_demo测试
 └── wifi_bk7235						--- wifi_bk7235样例
 ```
