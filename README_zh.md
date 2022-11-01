@@ -2,19 +2,19 @@
 
 ## 介绍
 
-该仓库托管BEKEN开发的，基于BK7235芯片的示例代码。包括XTS测试和WiFi_BK7235的配置文件和HAL模块
+该仓库托管博通集成（BEKEN）开发的，基于BK7235芯片的示例代码，包括XTS测试和WiFi_BK7235的配置文件和HAL模块。
 
 ## 目录框架
 
 ```
 vendor_beken/						--- vendor_beken 仓库路径
-├── xts_demo						--- xts_demo测试
-└── wifi_bk7235						--- wifi_bk7235样例
+├── xts_demo						--- XTS测试
+└── wifi_bk7235						--- WiFi_BK7235模块
 ```
 
 ## 安装教程
 
-参考[bk7235安装教程](https://gitee.com/openharmony-sig/device_soc_beken/blob/master/README_zh.md#编译环境搭建)
+参考[BK7235安装教程](https://gitee.com/openharmony-sig/device_soc_beken/blob/master/README_zh.md#编译环境搭建)
 
 ## 贡献
 
