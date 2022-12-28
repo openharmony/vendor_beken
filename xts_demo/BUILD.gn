@@ -12,10 +12,5 @@
 # limitations under the License.
 
 group("xts_demo") {
-  deps = [
-
-    "//test/xts/tools/lite/hctest:hctest",
-  
-  ]
+  deps = [ "//test/xts/tools/lite/hctest:hctest" ]
 }
-
