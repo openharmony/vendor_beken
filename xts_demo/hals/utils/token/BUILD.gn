@@ -25,7 +25,6 @@ static_library("hal_token_static") {
     "${beken_sdk_dir}/components/bk_cli/include/bk_private",
     "//utils/native/lite/hals/file",
     "//applications/iot_solution/thing_model/WiFi",
-
   ]
   include_dirs += bk_hal_include_dirs
 

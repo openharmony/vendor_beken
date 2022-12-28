@@ -14,10 +14,10 @@
           {
             "component": "liteos_m",
             "features": [
-            "ohos_kernel_liteos_m_lwip_path = \"//device/soc/beken/bk7235/liteos_m/bk_sdk_armino/components/lwip_intf_v2_1/lwip-2.1.2\""
+            "ohos_kernel_liteos_m_lwip_path = \"//device/soc/beken/bk7235/liteos_m/third_party_adapter/lwip_intf_v2_1\""
             ]
-		  }
-		]
+          }
+        ]
       },
       {
         "subsystem": "hiviewdfx",
@@ -50,7 +50,7 @@
         "subsystem": "startup",
         "components": [
           { "component": "bootstrap_lite", "features":[] },
-          { "component": "init_lite", "features":["enable_ohos_startup_init_feature_begetctl_liteos = false"] },
+          { "component": "init_lite", "features":["enable_ohos_startup_init_feature_begetctl_liteos = true"] },
           { "component": "syspara_lite", "features":[] }
         ]
       },
@@ -63,9 +63,10 @@
               "disable_authenticate = true",
               "huks_use_lite_storage = true",
               "huks_use_hardware_root_key = true",
+              "huks_use_mbedtls = true",
               "huks_config_file = \"hks_config_lite.h\"",
-              "ohos_security_huks_mbedtls_porting_path = \"//device/soc/beken/bk7235/liteos_m/components/mbedtls\""
-                
+              "huks_dependency_mbedtls_path = \"//third_party/mbedtls\"",
+              "ohos_security_huks_mbedtls_porting_path = \"//device/soc/beken/bk7235/liteos_m/third_party_adapter/mbedtls\""
             ]
           }
         ]
