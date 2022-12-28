@@ -13,13 +13,11 @@
 
 group("wifi_bk7235") {
   deps = [
-
     "//test/xts/tools/lite/hctest:hctest",
-    "//drivers/hdf_core/adapter/khdf/liteos_m:hdf_lite",
-    "//device/board/beken/bk7235x/hcs:hdf_hcs",
-    "//device/board/beken/bk7235x/hdf:bk_hdf_driver",
-    "//drivers/hdf_core/adapter/khdf/liteos_m/core:hdf_core",
-    "//drivers/hdf_core/adapter/khdf/liteos_m/osal:hdf_osal_lite",
+    #"//drivers/hdf_core/adapter/khdf/liteos_m:hdf_lite",
+    #"//device/board/beken/bk7235x/hcs:hdf_hcs",
+    #"//device/board/beken/bk7235x/hdf:bk_hdf_driver",
+    #"//drivers/hdf_core/adapter/khdf/liteos_m/core:hdf_core",
+    #"//drivers/hdf_core/adapter/khdf/liteos_m/osal:hdf_osal_lite",
   ]
 }
-
