@@ -69,8 +69,17 @@
               "huks_use_hardware_root_key = true",
               "huks_use_mbedtls = true",
               "huks_config_file = \"hks_config_lite.h\"",
-              "huks_dependency_mbedtls_path = \"//third_party/mbedtls\"",
-              "ohos_security_huks_mbedtls_porting_path = \"//device/soc/beken/bk7235/liteos_m/third_party_adapter/mbedtls\""
+              "huks_dependency_mbedtls_path = \"//third_party/mbedtls\""
+            ]
+          }
+        ]
+      },
+      {
+        "subsystem": "thirdparty",
+        "components": [
+          { "component": "mbedtls", "features":
+            [
+              "mbedtls_porting_path = \"//device/soc/beken/bk7235/liteos_m/third_party_adapter/mbedtls\""
             ]
           }
         ]
